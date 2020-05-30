@@ -33,7 +33,7 @@ Render.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length) {
-                console.log(result);
+                
                 callback(result);
             } else {
                 callback(null);
@@ -45,6 +45,7 @@ Render.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length) {
+                console.log(result);
                 checkLikes(result[0]['fraction'], vk_id, result, callback);
             } else {
                 callback(null);
