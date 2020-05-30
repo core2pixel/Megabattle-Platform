@@ -152,7 +152,7 @@ router.get('/vk_register', (req, res)=>{
     //Если всё хорошо
     if(typeof req.query.code != 'undefined'){
         //Запрос к API вк
-        let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri=http://localhost:80/vk_register';
+        let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri=http://194.67.92.140/vk_register';
         console.log('beforerequest');
     request(request_to_vk, { json: true }, (err, res_vk, body) => {
         console.log('request');
