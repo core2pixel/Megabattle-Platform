@@ -1,4 +1,4 @@
-<div class="auth_wrapper">
+<div class="auth_wrapper voting_wrapper">
             <div class="auth_form voting_form">
                 <div class="form_name">
                     Проголосовать за бэнгеры
@@ -10,32 +10,18 @@
                             <div class="voteSubject">
                                 {{{fraction_name}}}
                             </div>
-                            <div class="voteScore">
-                                <div class="voteMark">
-                                   <img src="img/start.png"> 
-                                </div>
-                                <div class="voteMark">
-                                   <img src="img/start.png"> 
-                                </div>
-                                <div class="voteMark">
-                                   <img src="img/start.png"> 
-                                </div>
-                                <div class="voteMark">
-                                   <img src="img/start.png"> 
-                                </div>
-                                <div class="voteMark">
-                                   <img src="img/start.png"> 
-                                </div>
+                            <div class="voteScore" id="voting_{{{fraction}}}">
                             </div>
                         </div>
                     </div>
                     {{/each}}
-                    <div class="form_field field_submit">
+                    <div class="form_field field_submit btn_vote">
                         <button class="input" type="button" class="button button_vote">Проголосовать</button>
                     </div>
                     <div class="form_field field_options">
                         <div class="auth_option-formReminder">
-                           Форму можно отправить только один раз
+                            Напоминаем, что <b>нельзя</b> выставлять одинаковые оценки разных факультетам<br><br>
+                           Форму можно отправить только <b>один раз</b>
                         </div>
                     </div>
                 </div>

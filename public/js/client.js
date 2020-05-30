@@ -7,9 +7,14 @@ $('.profile_user-photo').click(function(){
     if(show_profile_popup===0){
         $('.profile_popup').fadeIn(); 
         show_profile_popup = 1;
+        if($(window).width() < 470){
+            $('.header_logotype').fadeOut();
+        }
+        
     }else{
         $('.profile_popup').fadeOut();
         show_profile_popup = 0;
+        $('.header_logotype').fadeIn();
     }
    
 });
@@ -35,7 +40,30 @@ $('#seriesSlider').slick({
   slidesToScroll: 1,
     dots: false,
     autoplay: true,
-    arrows: false
+    arrows: false,
+    responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+        {
+      breakpoint: 500,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
     
 });
     $('#frame_slider').slick({
@@ -57,14 +85,7 @@ $('#slide_back').click(function(){
 $('#slide_forward').click(function(){
     $('#seriesSlider').slick('slickNext');
 })
-
-
-
-$( ".voteMark > img" ).click(function() {
-  $( this ).attr('src','img/start_enabled.png');
-});
-
-
+    
 $('.field_like > button').click(function(){
     savePoints();
     $('.field_like > button').css('background-color', 'rgba(219, 117, 253, 0.5)');
@@ -85,4 +106,122 @@ $('.field_like > button').click(function(){
         });
     }
 
+    
+//$('.voteScore').rate();
+let optionsMFF = {
+    max_value: 5,
+    step_size: 1,
+    cursor: 'cursor',
+    ajax_method: 'POST',
+    url: '/action/voting',
+    additional_data: {fraction: 'mff'}
+}
+let optionsTINT = {
+    max_value: 5,
+    step_size: 1,
+    cursor: 'cursor',
+    ajax_method: 'POST',
+    url: '/action/voting',
+    additional_data: {fraction: 'tint'}
+}
+let optionsKTU = {
+    max_value: 5,
+    step_size: 1,
+    cursor: 'cursor',
+    ajax_method: 'POST',
+    url: '/action/voting',
+    additional_data: {fraction: 'ktu'}
+}
+let optionsBTINS = {
+    max_value: 5,
+    step_size: 1,
+    cursor: 'cursor',
+    ajax_method: 'POST',
+    url: '/action/voting',
+    additional_data: {fraction: 'btins'}
+}
+let optionsFTMI = {
+    max_value: 5,
+    step_size: 1,
+    cursor: 'cursor',
+    ajax_method: 'POST',
+    url: '/action/voting',
+    additional_data: {fraction: 'ftmi'}
+}
+$("#voting_mff").rate(optionsMFF);
+$("#voting_tint").rate(optionsTINT);
+$("#voting_ktu").rate(optionsKTU);
+$("#voting_btins").rate(optionsBTINS);
+$("#voting_ftmi").rate(optionsFTMI);
 
+
+let colors = ['#db75fd', '#cb71e8', '#d078ec', '#cc72e8', '#d276ef'];
+$("#voting_tint").on("updateSuccess", function(ev, data){
+    
+    if(data.status==='success'){
+        $("#voting_tint").rate('destroy');
+        $("#voting_tint").parent().parent().remove();
+        $('.btn_vote').show();
+        $('.btn_vote > button').text('Сохранено!').css('background-color', colors[4]);
+        checkAmount();
+    }else{
+        alert(data.message);
+    }
+});
+$("#voting_mff").on("updateSuccess", function(ev, data){
+    
+    if(data.status==='success'){
+        $("#voting_mff").rate('destroy');
+        $("#voting_mff").parent().parent().remove();
+        $('.btn_vote').show();
+        $('.btn_vote > button').text('Сохранено!').css('background-color', colors[3]);
+        checkAmount();
+    }else{
+        alert(data.message);
+    }
+});
+$("#voting_btins").on("updateSuccess", function(ev, data){
+    
+    if(data.status==='success'){
+        $("#voting_btins").rate('destroy');
+        $("#voting_btins").parent().parent().remove();
+        $('.btn_vote').show();
+        $('.btn_vote > button').text('Сохранено!').css('background-color', colors[2]);
+        checkAmount();
+    }else{
+        alert(data.message);
+    }
+});
+$("#voting_ktu").on("updateSuccess", function(ev, data){
+    
+    if(data.status==='success'){
+        $("#voting_ktu").rate('destroy');
+        $("#voting_ktu").parent().parent().remove();
+        $('.btn_vote').show();
+        $('.btn_vote > button').text('Сохранено!').css('background-color', colors[1]);
+        checkAmount();
+    }else{
+        alert(data.message);
+    }
+});
+$("#voting_ftmi").on("updateSuccess", function(ev, data){
+    
+    if(data.status==='success'){
+        $("#voting_ftmi").rate('destroy');
+        $("#voting_ftmi").parent().parent().remove();
+        $('.btn_vote').show();
+        $('.btn_vote > button').text('Сохранено!').css('background-color', colors[0]);
+        checkAmount();
+    }else{
+        alert(data.message);
+    }
+});
+
+
+function checkAmount(){
+    let numItems = $('.field_vote').length;
+    if(numItems == 0){
+        $('.btn_vote > button').text('Готово!');
+        setTimeout(function(){window.location.href = "/home"}, 3000);
+    }
+}

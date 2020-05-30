@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Megabattle Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/media.css" rel="stylesheet">
 </head>
 <body>
 
+
 <div class="page_container" id="root">
-    <div class="page_wrapper wrapper_background">
-      {{> header}}
-       {{{body}}}
+    <div class="page_wrapper wrapper_background"> 
+         <div class="galery_wrapper">
+             <div class="galery_container">
+             {{> header}}
+               {{{body}}}     
+         </div>
+         </div>
     </div>
 </div>
-<script src="js/react.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/rater.min.js"></script>
 <script src="js/client.js"></script>
 </body>
 </html>

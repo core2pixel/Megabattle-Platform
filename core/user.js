@@ -170,6 +170,65 @@ User.prototype = {
 
 
     },
+    voting: function (vk_id, fraction, score, user_fraction, callback) {
+        
+        getType(checkAlreadyVoted);
+        function getType(callback){
+        let sql = `SELECT type FROM voting WHERE is_enabled = 1 LIMIT 1`;
+        pool.query(sql, function (err, result) {
+            if (err) throw err;
+            callback(result[0]['type'], checkScores, sendMessage);
+        });    
+        }
+        function checkAlreadyVoted(type, callback, messanger){
+        let sql = `SELECT id FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND fraction = '`+fraction+`')`;
+        pool.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log(type)
+            if(!result.length){
+                callback(type, insertValue, messanger);
+            }else{
+                messanger({status: 'error', message: 'Вы уже проголосовали за этот факультет'});
+            }
+            
+        });    
+        }
+        function checkScores(type, callback, messanger){
+            console.log(type)
+        let sql = `SELECT score FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`') `;
+        pool.query(sql, function (err, result) {
+            if (err) throw err;
+            if(compareScore(score, result)){
+                callback(type);
+            }else{
+                messanger({status: 'error', message: 'Вы уже ставили эту оценку'});
+            }
+        });     
+        }
+        function compareScore(score, scores){
+            for(let i = 0; i < scores.length; i++){
+                if(scores[i]['score'] == score){
+                    return false;
+                }
+            }
+            return true;
+        }
+        function insertValue(type){
+            console.log(type)
+        let sql = `INSERT INTO voting_results (vk_id, fraction, score, user_fraction, type) VALUE('`+vk_id+`', '`+fraction+`', '`+score+`', '`+user_fraction+`', '`+type+`')`;
+        pool.query(sql, function (err, result) {
+            if (err) throw err;
+            callback({status: 'success'});
+        });      
+        }
+        
+        function sendMessage(msg){
+            callback(msg);
+        }
+
+
+
+    }
 
 }
 

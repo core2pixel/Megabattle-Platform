@@ -81,13 +81,39 @@ Render.prototype = {
         let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3) LIMIT 5`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            if (result.length === 5) {
-                callback(data);
+            if (result.length === 4) {
+                checkAlreadyVoted(type, data);
             } else {
                 callback(null);
             }
+        }); 
+         
+        }
+            function checkAlreadyVoted(type, data){
+        let sql = `SELECT fraction FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`')`;
+        pool.query(sql, function (err, result) {
+            if (err) throw err
+            if (!result.length) {
+                callback(data);
+            } else {
+                if(data.length === result.length){
+                    callback('voted');
+                }else{
+                   for(let i = 0; i < data.length; i++){
+                    for(let x = 0; x < result.length; x++){
+                        if(data[i]['fraction'] === result[x]['fraction']){
+                            data.splice(i, 1);
+                        }
+                    }
+                }
+                callback(data); 
+                }
+                
+            }
         });    
         }
+        
+           
     },
     player: function (fraction, type, vk_id, callback) {
         let sql = `SELECT * FROM `+type+` WHERE (`+type+`_is_enabled = 1 AND fraction = '`+fraction+`') `;

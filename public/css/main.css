@@ -198,11 +198,14 @@ header,.series_container{
 }
 
 header{
-    padding-top: 10px;
+    
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100%;
+    box-sizing: border-box;
+    
+    padding-top: 10px;
 }
 .header_logotype{
     font-size: 32px;
@@ -215,6 +218,7 @@ nav{
     display: inline-block;
     padding-left: 40px;
 }
+
 ul{
     padding: 0px;
 }
@@ -266,24 +270,28 @@ li{
 }
 .profile_popup{
     position: relative;
-    height: 60px;
+    height: 45px;
     width: 150px;
     border-radius: 25px;
     background-color: rgba(31,13,53,0.81);
-    top: 60px;
-    right: 55px;
+    right: 165px;
     display: none;
+    z-index: 2;
 }
 .profile_popup > span{
     display: block;
     text-align: center;
-    
+    height: 100%;
+    line-height: 45px;
 }
 .header_fraction{
     font-family: "SemiBold";
     color: #FE8ADD;
     font-size: 20px;
     padding-top: 5px;
+}
+.profile_popup >.header_menu_mobile{
+    display: none;
 }
 .profile_notification {
     position: relative;
@@ -587,6 +595,8 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1f0d35",endCo
     float: right;
     position: relative;
     bottom: 0px;
+    line-height: 27px;
+    font-size: 30px;
 }
 .voteMark{
     float: left;
@@ -595,7 +605,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1f0d35",endCo
 .voteMark > img{
     height: 25px;
 }
-
+.voteMark > img:hover{
+    cursor: pointer;
+}
 .field_fraction > select{
     height: inherit;
     width: 225px;
@@ -668,4 +680,29 @@ option{
 }
 .alert_btn > button:hover{
     background-color: rgba(219, 117, 253, 0.8);
+}
+.btn_vote > button{
+    width: 280px !important;
+    border-radius: 15px !important;
+}
+.rate-base-layer > span{
+    color: rgba(219, 117, 253, 0.5) !important;
+}
+.rate-select-layer > span, .rate-hover-layer > span {
+/*    font-size: 30px !important;*/
+    color: rgba(219, 117, 253, 1) !important;
+}
+
+.star-rating .star-value{
+        background: url("myStar_on.svg") !important;
+}
+.auth_option-formReminder > b{
+    color: #ff4949;
+}
+
+.btn_vote{
+    display: none;
+}
+.btn_vote > button{
+    background-color: rgba(219, 117, 253, 1) !important;
 }

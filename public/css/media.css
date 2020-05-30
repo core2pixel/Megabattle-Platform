@@ -1,0 +1,255 @@
+/*Login and Register*/
+@media(max-width: 500px){
+.auth_logo > img {
+    height: 120px;
+}
+.form_name {
+    font-size: 17px;
+    padding-bottom: 20px;
+}
+.auth_wrapper {
+    width: 240px;
+}
+.field_submit > .input {
+    font-size: 16px;
+}
+}
+/*Notifications*/
+@media(max-width: 500px){
+.alert_name {
+    font-size: 20px;
+}
+.alert_body {
+    font-size: 16px;
+}
+.alert {
+    width: 280px;
+}
+.alert_name > img {
+    height: 18px;
+}
+}
+/*Home*/
+@media(max-width: 1450px){
+/*
+    #header{
+        padding: 0px 30px;
+        padding-top: 15px;
+    }
+    .header_profile{
+        right: 15px;
+    }
+*/
+.galery_container {
+    max-width: 1160px;
+}
+}
+@media(max-width: 1200px){
+    .galery_container {
+    max-width: 980px;
+}
+    .videoName {
+    font-size: 16px;
+    float: left;
+    width: 100%;
+}
+    .videoOwner {
+    font-family: "Medium";
+    background-color: rgba(219, 117, 253, 0.5);
+    display: inline-block;
+    font-size: 14px;
+    top: 2px;
+}
+    .videoParameters {
+    font-size: 18px;
+}
+    .videoPlot {
+    max-width: 600px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+    .videoContent {
+    padding-left: 20px;
+}
+    .videoAction {
+    margin-top: 20px;
+}
+    .videoAction > a > .form_field {
+    margin-right: 2px;
+}
+    .controlType {
+    font-size: 20px;
+}
+}
+@media(max-width: 991px){
+    nav{
+        display: none;
+    }
+    
+    .profile_popup{
+        background-color: rgba(0,0,0,0);
+    }
+    .header_menu_mobile,.header_loggout{
+        display: block;
+        border-radius: 25px;
+        background-color: rgba(31,13,53,1);
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+    .profile_popup >.header_menu_mobile{
+        display: block;
+    }
+    .series_container{
+        padding-top: 20px;
+    }
+    .videoName > h2 {
+    float: left;
+    height: 35px;
+}
+    #header{
+        padding: 0px 30px;
+        padding-top: 15px;
+    }
+    .header_logotype {
+    font-size: 26px;
+    top: 4px;
+}
+    li {
+    list-style: none;
+    display: inline;
+    padding-right: 24px;
+    font-size: 17px;
+    padding-bottom: 3px;
+}
+    .videoPoster,.videoContent{
+        float: none;
+    }
+    .series_mainContent{
+    max-width: 360px;
+    max-height: 570px;
+     margin: auto;
+    }
+    .videoPoster {
+    width: 360px;
+    height: 570px;
+    margin: auto;   
+    }
+    .series_mainContent {
+    height: 100%;
+}
+    .videoContent{
+        margin-top: 50px;
+        width: 500px;
+        height: 250px;
+        position: absolute;
+        left: 0px;
+    }
+    .series_container{
+        overflow-y: scroll;
+    }
+}
+@media(max-width: 650px){
+    .profile_popup{
+        background-color: rgba(31,13,53,1);
+    }
+    .series_mainContent{
+    max-width: 290px;
+    max-height: 440px;
+    }
+    .videoPoster {
+    width: 290px;
+    height: 440px;
+}
+    .videoContent{
+        width: 300px;
+        width: unset;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 0px 35px;
+    }
+    .videoOwner{
+        display: none;
+    }
+    .videoName > h2 {
+    float: left;
+    height: 35px;
+}
+
+    .videoName {
+    font-size: 14px;
+}
+    .videoParameters {
+    font-size: 16px;
+}
+}
+@media(max-width: 450px){
+    
+    .videoAction{
+        text-align: -webkit-center;
+    }
+    .field_banger,.field_watch,.field_like{
+        float: none;
+    }
+    .videoName > h2 {
+    float: left;
+    height: 55px;
+}
+}
+@media(max-width: 350px){
+    .series_mainContent{
+    max-width: 240px;
+    max-height: 370px;
+    }
+.videoPoster {
+    width: 240px;
+    height: 370px;
+}
+}
+/*Stream*/
+@media(max-width: 750px){
+    .stream_container{
+        padding: 0px 20px;
+        padding-top: 100px;
+        box-sizing: border-box;
+    }
+}
+
+/*Voting*/
+@media(max-width: 500px){
+    .voting_wrapper{
+        width: 280px;
+    }
+}
+@media(max-width: 400px){
+    .btn_vote > button{
+        width: 220px !important;
+    }
+    .voting_form {
+    width: 230px;
+    }
+    .voteSubject {
+    font-size: 16px;
+    line-height: 27px;
+}
+    .auth_option-formReminder{
+        font-size: 14px;
+    }
+}
+
+/*Player*/
+@media(max-width: 1060px){
+    
+}
+@media(max-height: 700px){
+    
+}
+@media(max-width: 500px){
+    .player_wrapper{
+        height: 400px;
+        padding: 0px 20px;
+        box-sizing: border-box;
+    }
+    .streamStatus{
+        font-size: 20px;
+    }
+}

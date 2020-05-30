@@ -24,6 +24,11 @@ user.likes(user_id, currentFraction, function(result){
     
 });
 });
-
+router.post('/voting', (req, res, next) => {
+let sessionVk = req.session.user;
+user.voting(sessionVk.user_id, req.body.fraction, req.body.value,  sessionVk.fraction, function(result){
+    res.send(result);
+});
+});
 //export this router to use in our index.js
 module.exports = router;

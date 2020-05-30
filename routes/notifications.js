@@ -47,7 +47,13 @@ router.get('/voting_issues', (req, res) =>{
     action: '/home'
   })
 });
-
+router.get('/votingAlready_issues', (req, res) =>{
+    res.render('notification', {
+    layout: 'notification',
+    message: 'Вы уже проголосовали!',
+    action: '/home'
+  })
+});
 router.get('/renderSeries_issues', (req, res) =>{
     res.render('notification', {
     layout: 'notification',
@@ -69,5 +75,6 @@ router.get('/content_disabled', (req, res) =>{
     action: '/home'
   })
 });
+
 //export this router to use in our index.js
 module.exports = router;

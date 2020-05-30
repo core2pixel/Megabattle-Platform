@@ -127,12 +127,16 @@ router.get('/voting', (req, res) =>{
     let user = req.session.user;
     if(user) {
             render_layout.voting(user.fraction, user.user_id, function(result){
-                if(result){
-                    result[0].fraction = translateFraction(result[0].fraction);
-                    res.render('voting', {name:user.username, avatar:user.vk_image, fraction: translateFraction(user.fraction), voting: result});
+                if(result === 'voted'){
+                    res.redirect('/notification/votingAlready_issues');
+                }else{
+                    if(result){
+                    res.render('voting', {layout: 'voting', name:user.username, avatar:user.vk_image, fraction_name: translateFraction(result[0].fraction), fraction: translateFraction(user.fraction), voting: result});
                 }else{
                     res.redirect('/notification/voting_issues');
                 }
+                }
+                
             });
             return;
         
@@ -237,9 +241,6 @@ function translateFraction(fraction){
     case 'btins':
     return 'БТИНС';        
     break;
-    case 'tint':
-    return 'ТИНТ';            
-    break;
     case 'ftmi':
     return 'ФТМИ';
     break;
@@ -257,9 +258,6 @@ function checkGetFraction(fraction){
     break;
     case 'btins':
     return true;         
-    break;
-    case 'tint':
-    return true;              
     break;
     case 'ftmi':
     return true;  
