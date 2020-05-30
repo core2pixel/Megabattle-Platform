@@ -1,0 +1,31 @@
+<div class="otherSeries" id="galery">
+    <div class="seriesControl" id="seriesControl">
+        <div class="controlType">
+            Смотрите далее <img src="img/watch_icon.png">
+        </div>
+        <div class="controlOptions">
+            <div class="controlOption optionActive" id="slide_back">
+                Назад
+            </div>
+            <div class="controlOption optionActive" id="slide_forward">
+                Вперёд
+            </div>
+        </div>
+    </div>
+    <div class="seriesSlider" id="seriesSlider">
+        {{#each series}}
+            
+                <div class="seriesFrame" id="series_{{{fraction}}}">
+                   <a href="home?series={{{fraction}}}" class="seriesLink">
+                    <div class="seriesWallpaper" style="background-image: url(img/series_content/posters/{{{fraction}}}.jpg)">
+                        <div class="seriesOwner">
+                            {{{fraction_name}}}
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            
+
+        {{/each}}
+    </div>
+</div>

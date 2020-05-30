@@ -1,0 +1,40 @@
+<div class="series_container" id="content">
+            <div class="series_mainContent">
+                 <div class="videoPoster" style="background-image: url(img/series_content/posters/{{{series.0.fraction}}}.jpg)"></div>
+                 <div class="videoContent">
+                     <div class="videoName">
+                     <h2>{{{series.0.name}}}</h2><div class="videoOwner">{{{series.0.fraction_name}}}</div>
+                 </div>
+                 <div class="videoParameters">
+                     {{{series.0.year}}}. {{{series.0.genre}}}. {{{series.0.duration}}}
+                 </div>
+                 <div class="videoPlot">
+                     {{{series.0.descr}}}
+                 </div>
+                 <div class="videoAction">
+                   {{#if banger_is_enabled}}
+                   {{> banger_btn}}
+                   {{else}}
+                   {{> banger_disabled}}
+                   {{/if}}
+                    {{#if series_is_enabled}}
+                   {{> series_btn}}
+                   {{else}}
+                   {{> series_disabled}}
+                   {{/if}}
+                    
+                    
+                    {{#if like}}
+                   {{> like_disabled}}
+                   {{else}}
+                   {{> like}}
+                   {{/if}}
+                 </div>
+                 </div>
+                 
+                 
+            </div>
+            <div class="series_additionalContent">
+                
+            </div>
+</div>

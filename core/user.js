@@ -1,0 +1,176 @@
+const pool = require('./pool');
+const bcrypt = require('bcrypt');
+const request = require('request');
+function User() {};
+
+User.prototype = {
+    // Find the user data by id or username.
+    find: function (user = null, callback) {
+        // if the user variable is defind
+        if (user) {
+            // if user = number return field = id, if user = string return field = username.
+            var field = Number.isInteger(user) ? 'id' : 'email';
+        }
+        // prepare the sql query
+        let sql = `SELECT * FROM users WHERE ${field} = ?`;
+
+        pool.query(sql, user, function (err, result) {
+            if (err) throw err
+
+            if (result.length) {
+
+                callback(result[0]);
+            } else {
+
+                callback(null);
+            }
+        });
+    },
+
+    // This function will insert data into the database. (create a new user)
+    // body is an object 
+    create: function (body, callback) {
+        checkExistingAccount(body['user_id']);
+
+        function checkExistingAccount(id) {
+            let sql = `SELECT * FROM users WHERE vk_id = ` + id;
+            pool.query(sql, function (err, result) {
+                if (err) throw err;
+                console.log(result);
+                if (result.length === 0) {
+                    createAccount(body)
+                } else {
+                    callback('Account already registered');
+                }
+            });
+        }
+
+        function createAccount(body) {
+            var bind = [];
+            for (prop in body) {
+                bind.push(body[prop]);
+            }
+            let sql = `INSERT INTO users(vk_token, vk_expires_in, vk_id, username, fraction) VALUES (?, ?, ?, ?, ?)`;
+
+            pool.query(sql, bind, function (err, result) {
+                if (err) throw err;
+                fillAccount(body, function(){
+                    callback('ok');
+                });
+                
+            });
+        }
+
+        function fillAccount(body, callback) {
+            let request_to_vk = 'https://api.vk.com/method/users.get?user_id='+body['user_id']+'&access_token='+body['access_token']+'&v=5.107&fields=photo_200';
+            request(request_to_vk, {
+                json: true
+            }, (err, res_vk, body) => {
+                if (err) {
+                    return console.log(err);
+                }
+                if (typeof body['response'][0].photo_200 != 'undefined') {
+                    let sql = `UPDATE users SET vk_image = '` + body['response'][0].photo_200 + `'  WHERE vk_id = ` + body['response'][0].id;
+            pool.query(sql, function (err, result) {
+                if (err) throw err;
+                callback(body);
+            });
+                    
+                }
+            });
+        }
+
+    },
+
+    login: function (body, callback) {
+        checkExistingAccount(body);
+        function checkExistingAccount(id) {
+            let sql = `SELECT * FROM users WHERE vk_id = ` + body['user_id'];
+            console.log(sql);
+            pool.query(sql, function (err, result) {
+                if (err) throw err;
+                if (result.length !== 0) {
+                    body['vk_image'] = result[0]['vk_image'];
+                    body['fraction'] = result[0]['fraction'];
+                    body['username'] = result[0]['username'];
+                    updateToken(body);
+                } else {
+                    callback('No such account');
+                }
+            });
+        }
+
+        function updateToken(body) {
+            let sql = `UPDATE users SET vk_token = '` + body['access_token'] + `'  WHERE vk_id = ` + body['user_id'];
+            pool.query(sql, function (err, result) {
+                if (err) throw err;
+                callback(body);
+            });
+        }
+        
+    },
+    points: function (point, link, user_id, fraction, type, callback) {
+        checkExisting();
+        
+        function checkExisting(){
+        let sql = `SELECT points FROM progress WHERE vk_id = '`+user_id+`' AND link = '`+link+`' `;
+        pool.query(sql, function (err, result) {
+            if (err) throw err
+            if (result.length){ 
+                fillRow(result[0]['points']);
+            } else {
+                createRow();
+            }
+        });    
+        }
+        function createRow(){
+        let sql = `INSERT INTO progress (points, link, vk_id, fraction, type) VALUES('`+point+`','`+link+`','`+user_id+`','`+fraction+`','`+type+`') `;
+        pool.query(sql, function (err, result) {
+            if (err) throw err
+            fillRow(getCurrentPoints());
+            
+        });
+        }
+        function getCurrentPoints(){
+        let sql = `SELECT points FROM progress WHERE vk_id = '`+user_id+`' AND link = '`+link+`'  `;
+        pool.query(sql, function (err, result) {
+            if (err) throw err
+            return result[0]['points'];
+            
+        });
+        }    
+        function fillRow(data){
+            if(point - data == 1 && point < 4){
+             let sql = `UPDATE progress SET points = '`+point+`' WHERE vk_id = '`+user_id+`' AND link = '`+link+`'  `;
+            pool.query(sql, function (err, result) {
+            if (err) throw err
+            
+        });   
+            }
+        }
+    },
+    likes: function (user_id, currentFraction, callback) {
+        let sql = `SELECT id FROM likes WHERE (vk_id = '` + user_id + `' AND fraction = '` + currentFraction + `')`;
+        pool.query(sql, function (err, result) {
+            if (err) throw err;
+            if (result.length == 0) {
+                insertLike();
+            } else {
+
+            }
+        });
+        
+        function insertLike(){
+        let sql = `INSERT INTO likes (value, vk_id, fraction) VALUE(1, '`+user_id+`', '`+currentFraction+`')`;
+        pool.query(sql, function (err, result) {
+            if (err) throw err;
+        });    
+        }
+
+
+
+    },
+
+}
+
+module.exports = User;

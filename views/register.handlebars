@@ -1,0 +1,37 @@
+<div class="auth_wrapper">
+    <form method="post" action="/register">
+        <div class="auth_logo">
+            <img src="img/itmo_megabattle_logo.png" alt="ИТМО Мегабаттл логотип">
+        </div>
+        <div class="auth_form">
+            <div class="form_name">
+                Зарегистрироваться
+            </div>
+            <div class="form_fields">
+                <div class="form_field field_name">
+                    <input class="input" name="username" type="text" placeholder="Введите имя">
+                </div>
+                <div class="form_field field_fraction">
+                    <select name="fraction">
+                      <option value="mff">МФФ</option>
+                      <option value="ktu">КТиУ</option>
+                      <option value="tint">ТИНТ</option>
+                      <option value="ftmi">ФТМИ</option>
+                      <option value="btins">БТИНС</option>
+                      <option value="watcher">Наблюдатель</option>
+                    </select>
+                </div>
+                <div class="form_field field_submit">
+                    <button class="input" type="submit" class="button button_auth">Войти через ВК</button>
+                </div>
+                <div class="form_field field_options">
+                    <div class="auth_option-forgotPassword">
+                            Уже есть аккаунт?<br>
+                            <a href="/login">Войдите</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

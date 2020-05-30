@@ -1,0 +1,25 @@
+{
+  "name": "megabattle-platform",
+  "version": "1.0.0",
+  "description": "online platform for streaming events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "megabattle_platform"
+  },
+  "author": "Danil Kladnitskiy",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "react": "^16.13.1",
+    "request": "^2.88.2",
+    "util": "^0.12.3"
+  }
+}
