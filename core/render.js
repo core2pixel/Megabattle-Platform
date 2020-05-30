@@ -73,10 +73,12 @@ Render.prototype = {
             console.log(sql);
             if (result.length > 0) {
                 data[0]['like'] = true;
-                mergeJSON(data, series, callback);
+                //mergeJSON(data, series, callback);
+                callback(data);
             } else {
                 data[0]['like'] = false;
-                mergeJSON(data, series, callback);
+                callback(data);
+                //mergeJSON(data, series, callback);
             }
         });    
         }
@@ -89,11 +91,11 @@ Render.prototype = {
                 original[i]['descr'] = needed[x]['descr'];
                 original[i]['fraction_name'] = needed[x]['fraction_name'];
                 original[i]['duration'] = needed[x]['duration'];
+                original[i]['genre'] = needed[x]['genre'];
             }
             
         }
     }
-    console.log(original);
     callback(original);
 }
     },
