@@ -64,7 +64,6 @@ Render.prototype = {
                 callback(null);
             }
         });
-        callback();
         
         function checkLikes(fraction, vk_id, data, callback){
         let sql = `SELECT id FROM likes WHERE (fraction = '`+fraction+`' AND vk_id = '`+vk_id+`') `;
