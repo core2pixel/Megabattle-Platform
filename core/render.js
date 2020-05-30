@@ -73,7 +73,7 @@ Render.prototype = {
             console.log(sql);
             if (result.length > 0) {
                 data[0]['like'] = true;
-                mergeJSON(data, series, callback);
+                //mergeJSON(data, series, callback);
             } else {
                 data[0]['like'] = false;
                 mergeJSON(data, series, callback);
