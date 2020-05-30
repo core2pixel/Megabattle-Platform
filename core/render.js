@@ -88,6 +88,7 @@ Render.prototype = {
                 original[i]['name'] = needed[x]['name'];
                 original[i]['descr'] = needed[x]['descr'];
                 original[i]['fraction_name'] = needed[x]['fraction_name'];
+                original[i]['duration'] = needed[x]['duration'];
             }
             
         }
