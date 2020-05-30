@@ -76,6 +76,7 @@ Render.prototype = {
                 mergeJSON(data, series, callback);
             } else {
                 data[0]['like'] = false;
+                console.log(data);
                 mergeJSON(data, series, callback);
             }
         });    
