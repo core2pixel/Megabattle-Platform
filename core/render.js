@@ -5,6 +5,22 @@ let series = [
 {"id":"4","name":"Ленинградский эксперимент","youtube_link":"jPan651rVMs","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false},
 {"id":"6","name":"Ленинградский эксперимент","youtube_link":"pz1ztvu77FM","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false}
 ]
+let voting = [
+{"id":"1","fraction":"mff","fraction_name":"МФФ","type":"banger","is_enabled":"1"},
+{"id":"2","fraction":"ftmi","fraction_name":"ФТМИ","type":"banger","is_enabled":"1"},
+{"id":"4","fraction":"ktu","fraction_name":"КТУ","type":"banger","is_enabled":"1"},
+{"id":"5","fraction":"btins","fraction_name":"БТИНС","type":"banger","is_enabled":"1"},
+{"id":"6","fraction":"mff","fraction_name":"МФФ","type":"series","is_enabled":"0"},
+{"id":"7","fraction":"ftmi","fraction_name":"ФТМИ","type":"series","is_enabled":"0"},
+{"id":"9","fraction":"ktu","fraction_name":"КТУ","type":"series","is_enabled":"0"},
+{"id":"10","fraction":"btins","fraction_name":"БТИНС","type":"series","is_enabled":"0"}
+]
+let bangers = [
+{"id":"1","name":"Ленинградский эксперимент","text":"Бэнгер факультета Фотоники","fraction":"mff","youtube_link":"pB-GfkFu_lM","bangers_is_enabled":"1"},
+{"id":"4","name":"Ленинградский эксперимент","text":"Бэнгер ФТМИ","fraction":"ftmi","youtube_link":"5mm163wWKL8","bangers_is_enabled":"1"},
+{"id":"5","name":"Ленинградский эксперимент","text":"Бэнгер факультета КТиУ","fraction":"ktu","youtube_link":"oYhB8F7LF2I","bangers_is_enabled":"1"},
+{"id":"6","name":"Ленинградский эксперимент","text":"Бэнгер факультета БТИНС","fraction":"btins","youtube_link":"g9wFQTzRfog","bangers_is_enabled":"1"}
+]
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -125,7 +141,7 @@ Render.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (!result.length) {
-                callback(data);
+                mergeJSON(data, voting, callback);
             } else {
                 if(data.length === result.length){
                     callback('voted');
@@ -137,7 +153,7 @@ Render.prototype = {
                         }
                     }
                 }
-                callback(data); 
+                mergeJSON(data, voting, callback);
                 }
                 
             }
