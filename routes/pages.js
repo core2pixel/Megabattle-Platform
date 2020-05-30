@@ -157,6 +157,7 @@ router.get('/vk_register', (req, res)=>{
     request(request_to_vk, { json: true }, (err, res_vk, body) => {
         console.log('request');
   if (err) { return console.log(err); }
+        console.log(body);
   if(typeof body['user_id'] != 'undefined'){
       console.log('got');
       let username = state.split('/')[0];
