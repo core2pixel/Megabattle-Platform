@@ -1,5 +1,6 @@
 const pool = require('./pool');
 const request = require('request');
+
 function User() {};
 
 User.prototype = {

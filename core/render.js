@@ -1,28 +1,39 @@
 const pool = require('./pool');
+let series = [
+{"id":"1","name":"Ленинградский эксперимент","youtube_link":"L0blnTRD2qU","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0"},
+{"id":"3","name":"Ленинградский эксперимент","youtube_link":"K09_5IsgGe8","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0"},
+{"id":"4","name":"Ленинградский эксперимент","youtube_link":"jPan651rVMs","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0"},
+{"id":"6","name":"Ленинградский эксперимент","youtube_link":"pz1ztvu77FM","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0"}
+]
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 function Render() {};
 
 Render.prototype = {
     // Find the user data by id or username.
     seriesRandom: function (vk_id, callback) {
-        let sql = `SELECT * FROM series ORDER BY RAND() LIMIT 5`;
-        pool.query(sql, function (err, result) {
-            if (err) throw err
-            if (result.length > 0) {
-                checkLikes(result[0]['fraction'], vk_id, result, callback);
-            } else {
-                callback(null);
-            }
-        });
+//        let sql = `SELECT * FROM series ORDER BY RAND() LIMIT 5`;
+//        pool.query(sql, function (err, result) {
+//            if (err) throw err
+//            if (result.length > 0) {
+//                checkLikes(result[0]['fraction'], vk_id, result, callback);
+//            } else {
+//                callback(null);
+//            }
+//        });
+        let rand_num = getRandomInt(4);
+        checkLikes(series[getRandomInt(rand_num)]['fraction'], vk_id, series, rand_num, callback);
         
-        function checkLikes(fraction, vk_id, data, callback){
+        function checkLikes(fraction, vk_id, data, rand_num, callback){
         let sql = `SELECT id FROM likes WHERE (fraction = '`+fraction+`' AND vk_id = '`+vk_id+`') `;
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length > 0) {
-                data[0]['like'] = true;
+                data[rand_num]['like'] = true;
                 callback(data);
             } else {
-                data[0]['like'] = false;
+                data[rand_num]['like'] = false;
                 callback(data);
             }
         });    
@@ -41,11 +52,11 @@ Render.prototype = {
         });
     },
     seriesByFraction: function (fraction, vk_id, callback) {
+
         let sql = `SELECT * FROM series WHERE fraction='`+fraction+`' UNION SELECT * FROM series WHERE fraction != '`+fraction+`'`;
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length) {
-                console.log(result);
                 checkLikes(result[0]['fraction'], vk_id, result, callback);
             } else {
                 callback(null);
@@ -144,5 +155,10 @@ Render.prototype = {
     }
 
 }
-
+function encodeSymbols(string) {
+    switch(string) {
+  case 'value1': 
+    return 'Ленинградский эксперимент';
+}
+}
 module.exports = Render;
