@@ -73,17 +73,19 @@ Render.prototype = {
             console.log(sql);
             if (result.length > 0) {
                 data[0]['like'] = true;
-                mergeJSON(result, series, callback);
+                mergeJSON(data, series, callback);
             } else {
                 data[0]['like'] = false;
-                mergeJSON(result, series, callback);
+                mergeJSON(data, series, callback);
             }
         });    
         }
         
         function mergeJSON(original, needed, callback){
     for(let i = 0; i < original.length; i++){
+        console.log(original[i]);
         for(let x = 0; x < needed.length; x++){
+            console.log(needed[x]);
             if(original[i]['fraction']===needed[x]['fraction']){
                 original[i]['name'] = needed[x]['name'];
                 original[i]['descr'] = needed[x]['descr'];
