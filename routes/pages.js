@@ -33,10 +33,10 @@ router.get('/home', (req, res, next) => {
         let fractionSpelling = checkGetFraction(req.query.series);
         if (req.query.series !== undefined && fractionSpelling) {
             render_layout.seriesByFraction(req.query.series, user.user_id, function (result) {
-                console.log(result);
+                console.log(1);
                 if(result){
-                    
-                user.currentFraction = req.query.series;
+                console.log(2);    
+                user.currentFraction = result[0]['fraction'];
                 res.render('series', {
                     layout: 'galery',
                     name: user.username,
@@ -55,7 +55,9 @@ router.get('/home', (req, res, next) => {
         } else {
         //Рендерим рандомную серию
             render_layout.seriesRandom(user.user_id, function (result) {
+                
                 if(result){
+                    
                 user.currentFraction = result[0]['fraction'];
                 res.render('series', {
                     layout: 'galery',
