@@ -25,7 +25,6 @@ router.get('/', (req, res, next) => {
 
 // Get home page
 router.get('/home', (req, res, next) => {
-    res.header("Content-Type", "application/json; charset=utf-8");
     //Загружаем инфо о сессии
     let user = req.session.user;
     //Проверяем вход
