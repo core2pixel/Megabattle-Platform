@@ -1,5 +1,4 @@
 const pool = require('./pool');
-const bcrypt = require('bcrypt');
 const request = require('request');
 function User() {};
 
