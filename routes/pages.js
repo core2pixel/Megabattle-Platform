@@ -153,9 +153,12 @@ router.get('/vk_register', (req, res)=>{
     if(typeof req.query.code != 'undefined'){
         //Запрос к API вк
         let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri=http://localhost:80/vk_register';
+        console.log('beforerequest');
     request(request_to_vk, { json: true }, (err, res_vk, body) => {
+        console.log('request');
   if (err) { return console.log(err); }
   if(typeof body['user_id'] != 'undefined'){
+      console.log('got');
       let username = state.split('/')[0];
       let fraction = state.split('/')[1];
       body['username'] = username;
