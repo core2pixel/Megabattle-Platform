@@ -33,8 +33,9 @@ router.get('/home', (req, res, next) => {
         let fractionSpelling = checkGetFraction(req.query.series);
         if (req.query.series !== undefined && fractionSpelling) {
             render_layout.seriesByFraction(req.query.series, user.user_id, function (result) {
+                console.log(result);
                 if(result){
-                    console.log(result);
+                    
                 user.currentFraction = req.query.series;
                 res.render('series', {
                     layout: 'galery',
