@@ -40,16 +40,17 @@ Render.prototype = {
         }
     },
     series: function (callback) {
-        let sql = `SELECT * FROM series`;
-        pool.query(sql, function (err, result) {
-            if (err) throw err
-            if (result.length) {
-                
-                callback(result);
-            } else {
-                callback(null);
-            }
-        });
+//        let sql = `SELECT * FROM series`;
+//        pool.query(sql, function (err, result) {
+//            if (err) throw err
+//            if (result.length) {
+//                
+//                callback(result);
+//            } else {
+//                callback(null);
+//            }
+//        });
+        callback(series);
     },
     seriesByFraction: function (fraction, vk_id, callback) {
 
@@ -62,6 +63,7 @@ Render.prototype = {
                 callback(null);
             }
         });
+        callback();
         
         function checkLikes(fraction, vk_id, data, callback){
         let sql = `SELECT id FROM likes WHERE (fraction = '`+fraction+`' AND vk_id = '`+vk_id+`') `;
@@ -70,10 +72,10 @@ Render.prototype = {
             console.log(sql);
             if (result.length > 0) {
                 data[0]['like'] = true;
-                callback(data);
+                mergeJSON(data, series, callback);
             } else {
                 data[0]['like'] = false;
-                callback(data);
+                mergeJSON(data, series, callback);
             }
         });    
         }
@@ -161,4 +163,18 @@ function encodeSymbols(string) {
     return 'Ленинградский эксперимент';
 }
 }
+function mergeJSON(original, needed, callback){
+    for(let i = 0; i < original.length; i++){
+        for(let x = 0; x < needed.length; x++){
+            if(original[i]['fraction']===needed[x]['fraction']){
+                original[i]['name'] = needed[x]['name'];
+                original[i]['descr'] = needed[x]['descr'];
+                original[i]['fraction_name'] = needed[x]['fraction_name'];
+            }
+            
+        }
+    }
+    callback(original);
+}
+
 module.exports = Render;
