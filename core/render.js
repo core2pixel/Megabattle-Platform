@@ -55,6 +55,7 @@ Render.prototype = {
     seriesByFraction: function (fraction, vk_id, callback) {
 
         let sql = `SELECT * FROM series WHERE fraction='`+fraction+`' UNION SELECT * FROM series WHERE fraction != '`+fraction+`'`;
+        
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length) {
@@ -79,6 +80,20 @@ Render.prototype = {
             }
         });    
         }
+        
+        function mergeJSON(original, needed, callback){
+    for(let i = 0; i < original.length; i++){
+        for(let x = 0; x < needed.length; x++){
+            if(original[i]['fraction']===needed[x]['fraction']){
+                original[i]['name'] = needed[x]['name'];
+                original[i]['descr'] = needed[x]['descr'];
+                original[i]['fraction_name'] = needed[x]['fraction_name'];
+            }
+            
+        }
+    }
+    callback(original);
+}
     },
     voting: function (user_fraction, vk_id, callback) {
         let sql = `SELECT * FROM voting WHERE (is_enabled = 1 AND fraction !='`+user_fraction+`')`;
@@ -163,18 +178,6 @@ function encodeSymbols(string) {
     return 'Ленинградский эксперимент';
 }
 }
-function mergeJSON(original, needed, callback){
-    for(let i = 0; i < original.length; i++){
-        for(let x = 0; x < needed.length; x++){
-            if(original[i]['fraction']===needed[x]['fraction']){
-                original[i]['name'] = needed[x]['name'];
-                original[i]['descr'] = needed[x]['descr'];
-                original[i]['fraction_name'] = needed[x]['fraction_name'];
-            }
-            
-        }
-    }
-    callback(original);
-}
+
 
 module.exports = Render;
