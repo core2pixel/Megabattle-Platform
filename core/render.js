@@ -33,6 +33,7 @@ Render.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length) {
+                console.log(result);
                 callback(result);
             } else {
                 callback(null);
