@@ -179,7 +179,7 @@ router.get('/vk_register', (req, res)=>{
 })
 router.get('/vk_login', (req, res) =>{
     if(typeof req.query.code != 'undefined'){
-        let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri=http://localhost:80/vk_login';
+        let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri=194.67.92.140/vk_login';
         request(request_to_vk, { json: true }, (err, res_vk, body) => {
   if (err) { return console.log(err); }
   if(typeof body['user_id'] != 'undefined'){
@@ -198,13 +198,13 @@ router.get('/vk_login', (req, res) =>{
 
 // Post login data
 router.post('/login', (req, res, next) => {
-let redirect = 'https://oauth.vk.com/authorize?client_id=7482992&display=page&redirect_uri=http://localhost:80/vk_login&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
+let redirect = 'https://oauth.vk.com/authorize?client_id=7482992&display=page&redirect_uri=194.67.92.140/vk_login&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
     res.redirect(redirect);
 });
 
 // Post register data
 router.post('/register', (req, res, next) => {
-    let redirect = 'https://oauth.vk.com/authorize?client_id=7482992&display=page&redirect_uri=http://localhost:80/vk_register&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
+    let redirect = 'https://oauth.vk.com/authorize?client_id=7482992&display=page&redirect_uri=194.67.92.140/vk_register&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
     res.redirect(redirect);
 });
 
