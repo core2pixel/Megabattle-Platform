@@ -7,7 +7,8 @@ const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     user: 'root', // use your mysql username.
-    password: '', // user your mysql password.
+    password: 'arwenPlatform_00', // user your mysql password.
+    //password: '',
     database: 'megabattle_platform'
 });
 
