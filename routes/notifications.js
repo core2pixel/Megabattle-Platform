@@ -19,6 +19,14 @@ router.get('/', (req, res) =>{
     action: '/'
   })
 });
+router.get('/accountAlreadyRegistered', (req, res) =>{
+    res.render('notification', {
+    layout: 'notification',
+    message: 'Вы уже были зарегистрированы на платформе!',
+    action: '/'
+  })
+});
+
 router.get('/noAuth', (req, res) =>{
     res.render('notification', {
     layout: 'notification',

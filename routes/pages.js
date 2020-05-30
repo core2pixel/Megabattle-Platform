@@ -147,8 +147,11 @@ router.get('/voting', (req, res) =>{
 
 /*Авторизация*/
 router.get('/vk_register', (req, res)=>{
+    //Дополнительные данные из запроса
     let state = req.query.state;
+    //Если всё хорошо
     if(typeof req.query.code != 'undefined'){
+        //Запрос к API вк
         let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri=http://localhost:80/vk_register';
     request(request_to_vk, { json: true }, (err, res_vk, body) => {
   if (err) { return console.log(err); }
@@ -164,6 +167,8 @@ router.get('/vk_register', (req, res)=>{
             req.session.user.fraction = fraction;
             req.session.opp = 0;
             res.redirect('/home');
+          }else if(result==='Account already registered'){
+              res.redirect('/notification/accountAlreadyRegistered');
           }
       });
   }
