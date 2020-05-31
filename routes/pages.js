@@ -35,10 +35,9 @@ router.get('/home', (req, res, next) => {
         let fractionSpelling = checkGetFraction(req.query.series);
         if (req.query.series !== undefined && fractionSpelling) {
             render_layout.seriesByFraction(req.query.series, user.user_id, function (result) {
-                console.log(1);
-                if(result){
-                console.log(2);    
+                if(result){ 
                 user.currentFraction = result[0]['fraction'];
+                console.log(user.user_id + ' из '+user.currentFraction+' загрузил плейлист по факультету');
                 res.render('series', {
                     layout: 'galery',
                     name: user.username,
@@ -60,8 +59,8 @@ router.get('/home', (req, res, next) => {
             render_layout.seriesRandom(user.user_id, function (result) {
                 
                 if(result){
-                    
                 user.currentFraction = result[0]['fraction'];
+                console.log(user.user_id + ' из '+user.currentFraction+' загрузил рандомное видео');
                 res.render('series', {
                     layout: 'galery',
                     name: user.username,
@@ -87,14 +86,18 @@ router.get('/player', (req, res) => {
     let user = req.session.user;
     if (user) {
         if (req.query.type !== undefined && req.query.fraction !== undefined) {
+            
             render_layout.player(req.query.fraction, req.query.type, user.user_id, function (result) {
                 if(result){
                 let script;
                 if(result[0]['passed']){
                     script = 'player.js';
+                    console.log(user.user_id + ' из '+user.currentFraction+' зашёл в плеер в первый раз. Смотрит ' + result[0]['text']);
                 }else{
+                    console.log(user.user_id + ' из '+user.currentFraction+' зашёл в плеер снова. Смотрит ' + result[0]['text']);
                     script = 'noclip_player.js';
                 }
+                    
                 res.render('player', {
                     layout: 'player',
                     link: result[0]['youtube_link'],
@@ -123,6 +126,7 @@ router.get('/player', (req, res) => {
 router.get('/stream', (req, res) =>{
     let user = req.session.user;
     if(user) {
+            console.log(user.user_id + ' из '+user.currentFraction+' зашёл на стрим.');
             res.render('stream', {name:user.username, avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream'});  
     }else{
        res.redirect('/notification/noAuth'); 
@@ -140,6 +144,7 @@ router.get('/voting', (req, res) =>{
                     res.redirect('/notification/votingAlready_issues');
                 }else{
                     if(result){
+                        console.log(user.user_id + ' из '+user.currentFraction+' зашёл на голосовалку.');
                     res.render('voting', {layout: 'voting', bg: 'voting', name:user.username, avatar:user.vk_image, fraction_name: translateFraction(result[0].fraction), fraction: translateFraction(user.fraction), voting: result});
                 }else{
                     res.redirect('/notification/voting_issues');
@@ -162,26 +167,21 @@ router.get('/vk_register', (req, res)=>{
     if(typeof req.query.code != 'undefined'){
         //Запрос к API вк
         let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri='+host+'/vk_register';
-        console.log('beforerequest');
     request(request_to_vk, { json: true }, (err, res_vk, body) => {
-        console.log('request');
   if (err) { return console.log(err); }
-        console.log(body);
   if(typeof body['user_id'] != 'undefined'){
-      console.log('got');
       let username = state.split('/')[0];
       let fraction = state.split('/')[1];
       body['username'] = username;
       body['fraction'] = fraction;
       user.create(body, function(result, vk_image){
-          
           if(result === 'ok'){
             req.session.user = body;
             req.session.user.fraction = fraction;
             console.log(vk_image);
             req.session.user.vk_image = vk_image['response'][0].photo_200;
             req.session.opp = 0;
-              
+            console.log(username + 'из '+fraction+' зарегистрировался');
             res.redirect('/home');
           }else if(result==='Account already registered'){
               res.redirect('/notification/accountAlreadyRegistered');
@@ -203,6 +203,7 @@ router.get('/vk_login', (req, res) =>{
           if(result!=='No such account'){
             req.session.user = body;
             req.session.opp = 0;
+            console.log(user.user_id + ' вошёл в систему');
             res.redirect('/home');
           }else{
               res.redirect('/notification/wasntegistered');
