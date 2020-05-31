@@ -33,6 +33,7 @@ let controlHeight = document.getElementById('seriesControl').clientHeight;
 if(galeryHeight > 280){
     galeryHeight = 280;
 }
+alert(galeryHeight);
 if(galeryHeight < 160){
     galeryHeight = 160;
 }
