@@ -201,6 +201,8 @@ router.get('/vk_login', (req, res) =>{
             req.session.user = body;
             req.session.opp = 0;
             res.redirect('/home');
+          }else{
+              res.redirect('/notification/wasntegistered');
           }
       });
   }

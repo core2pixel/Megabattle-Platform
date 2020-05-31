@@ -45,6 +45,10 @@
 }
 }
 @media(max-width: 1200px){
+    .controlOptions{
+    opacity: 1;
+    cursor: pointer;
+}
     .galery_container {
     max-width: 980px;
 }

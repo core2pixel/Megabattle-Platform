@@ -461,7 +461,8 @@ li{
     height: 70px;
 }
 .controlOptions{
-    
+    opacity: 0.2;
+    cursor: not-allowed;
 }
 #seriesSlider{
     overflow: hidden;

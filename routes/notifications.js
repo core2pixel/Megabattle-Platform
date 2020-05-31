@@ -26,6 +26,13 @@ router.get('/accountAlreadyRegistered', (req, res) =>{
     action: '/'
   })
 });
+router.get('/wasntegistered', (req, res) =>{
+    res.render('notification', {
+    layout: 'notification',
+    message: 'Вы ещё не зарегистрировались',
+    action: '/register'
+  })
+});
 
 router.get('/noAuth', (req, res) =>{
     res.render('notification', {
