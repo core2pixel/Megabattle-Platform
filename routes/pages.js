@@ -31,7 +31,7 @@ router.get('/home', (req, res, next) => {
     let user = req.session.user;
     //Проверяем вход
     if (user) {
-        //Рендерим рандомную серию
+        //Рендерим конкретную серию
         let fractionSpelling = checkGetFraction(req.query.series);
         if (req.query.series !== undefined && fractionSpelling) {
             render_layout.seriesByFraction(req.query.series, user.user_id, function (result) {
@@ -48,7 +48,7 @@ router.get('/home', (req, res, next) => {
                     series_is_enabled: result[0]['series_is_enabled'],
                     like: result[0]['like'],
                     fraction: translateFraction(user.fraction),
-                    fraction_code: user.fraction
+                    fraction_code: req.query.series
                 });    
                 }else{
                     res.redirect('/notification/noFractionSeries_issues');
@@ -71,7 +71,7 @@ router.get('/home', (req, res, next) => {
                     series_is_enabled: result[0]['series_is_enabled'],
                     like: result[0]['like'],
                     fraction: translateFraction(user.fraction),
-                    fraction_code: user.fraction
+                    fraction_code: result[0]['fraction']
                 });    
                 }else{
                     res.redirect('/notification/renderSeries_issues');
