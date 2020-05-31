@@ -35,7 +35,7 @@ if(galeryHeight > 280){
 }
 
 if(galeryHeight > 160 && $(document).width()<700){
-    $('#content').height(galeryHeight + (galeryHeight-160));
+    $('#content').height(contentHeight + (galeryHeight-160));
     galeryHeight = 160;
 }
 let seriesSliderHeight = galeryHeight - controlHeight;
