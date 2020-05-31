@@ -238,7 +238,8 @@ function checkAmount(){
 
 
 $(document).ready(function(){
-  if($(document).width()<700){
+    console.log($(document).width());
+  if(($(document).width()<700)){
     $('#frame_slider').slick('unslick');
     $('#frame_slider').remove();
 }
