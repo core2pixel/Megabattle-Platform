@@ -160,9 +160,9 @@
     max-width: 290px;
     max-height: 440px;
     }
-    .videoPoster {
-    width: 290px;
-    height: 510px;
+.videoPoster {
+    width: 230px;
+    height: 400px;
 }
     .videoContent{
         width: 300px;
