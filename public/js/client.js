@@ -20,7 +20,7 @@ $('.profile_user-photo').click(function(){
 });
 let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
-document.getElementById('page_wrapper').style.setProperty('--vh', `${vh}px`);
+document.documentElement.style.setProperty('--vh', `${vh}px`);
 function contentFix(){
 
 let headerHeight = document.getElementById('header').clientHeight;
