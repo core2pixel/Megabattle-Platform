@@ -174,11 +174,15 @@ router.get('/vk_register', (req, res)=>{
       body['username'] = username;
       body['fraction'] = fraction;
       user.create(body, function(result){
-          console.log(result);
+          
           if(result === 'ok'){
             req.session.user = body;
             req.session.user.fraction = fraction;
+              
+              console.log(result);
+            req.session.user.vk_image = body['response'][0].photo_200;
             req.session.opp = 0;
+              
             res.redirect('/home');
           }else if(result==='Account already registered'){
               res.redirect('/notification/accountAlreadyRegistered');
