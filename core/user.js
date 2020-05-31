@@ -68,13 +68,11 @@ User.prototype = {
                 if (err) {
                     return console.log(err);
                 }
-                console.log(body['response']);
                 if (typeof body['response'][0].photo_200 != 'undefined') {
                     let sql = `UPDATE users SET vk_image = '` + body['response'][0].photo_200 + `'  WHERE vk_id = ` + body['response'][0].id;
             pool.query(sql, function (err, result) {
                 if (err) throw err;
-                console.log(sql);
-                console.log(result);
+
                 callback(body, body['response'][0].photo_200);
             });
                     
