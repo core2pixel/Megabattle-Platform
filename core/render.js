@@ -88,15 +88,15 @@ Render.prototype = {
             console.log(sql);
             if (result.length > 0) {
                 data[0]['like'] = true;
-                //mergeJSON(data, series, callback);
+                mergeJSONSeries(data, series, callback);
             } else {
                 data[0]['like'] = false;
-                mergeJSON(data, series, callback);
+                mergeJSONSeries(data, series, callback);
             }
         });    
         }
         
-        function mergeJSON(original, needed, callback){
+        function mergeJSONSeries(original, needed, callback){
     for(let i = 0; i < original.length; i++){
         for(let x = 0; x < needed.length; x++){
             if(original[i]['fraction']===needed[x]['fraction']){
@@ -141,7 +141,7 @@ Render.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (!result.length) {
-                mergeJSON(data, voting, callback);
+                mergeJSONVoting(data, voting, callback);
             } else {
                 if(data.length === result.length){
                     callback('voted');
@@ -153,14 +153,25 @@ Render.prototype = {
                         }
                     }
                 }
-                mergeJSON(data, voting, callback);
+                mergeJSONVoting(data, voting, callback);
                 }
                 
             }
         });    
         }
         
-           
+       function mergeJSONVoting(original, needed, callback){
+    for(let i = 0; i < original.length; i++){
+        for(let x = 0; x < needed.length; x++){
+            if(original[i]['fraction']===needed[x]['fraction']){
+                original[i]['fraction_name'] = needed[x]['fraction_name'];
+
+            }
+            
+        }
+    }
+    callback(original);
+}    
     },
     player: function (fraction, type, vk_id, callback) {
         let sql = `SELECT * FROM `+type+` WHERE (`+type+`_is_enabled = 1 AND fraction = '`+fraction+`') `;
