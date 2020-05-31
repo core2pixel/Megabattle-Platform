@@ -114,10 +114,12 @@ Render.prototype = {
     },
     voting: function (user_fraction, vk_id, callback) {
         let sql = `SELECT * FROM voting WHERE (is_enabled = 1 AND fraction !='`+user_fraction+`')`;
+        
         pool.query(sql, function (err, result) {
             if (err) throw err
             
             if (result.length) {
+                console.log(result);
                 checkProgress(result[0]['type'], vk_id, result);
             } else {
                 callback(null);
