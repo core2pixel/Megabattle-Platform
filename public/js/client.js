@@ -35,6 +35,7 @@ if(galeryHeight > 280){
 }
 
 if(galeryHeight > 160 && $(document).width()<700){
+    $('#content').height(galeryHeight + (galeryHeight-160));
     galeryHeight = 160;
 }
 let seriesSliderHeight = galeryHeight - controlHeight;
@@ -44,10 +45,10 @@ document.getElementById('seriesSlider').style.height = seriesSliderHeight + "px"
     alert(headerHeight);
     alert(contentHeight);
     alert(galeryHeight);
-if($(document).width()<700){
-    let fix = rootHeight - (headerHeight + galeryHeight+6);
-    $('#content').height(fix);
-}
+//if($(document).width()<700){
+//    let fix = rootHeight - (headerHeight + galeryHeight+6);
+//    $('#content').height(fix);
+//}
     
     
     
