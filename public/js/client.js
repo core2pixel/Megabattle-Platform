@@ -40,10 +40,17 @@ if(galeryHeight > 160 && $(document).width()<700){
 let seriesSliderHeight = galeryHeight - controlHeight;
 document.getElementById('galery').style.height = galeryHeight + "px";
 document.getElementById('seriesSlider').style.height = seriesSliderHeight + "px";
+    alert(rootHeight);
+    alert(headerHeight);
+    alert(contentHeight);
+    alert(galeryHeight);
 if($(document).width()<700){
     let fix = rootHeight - (headerHeight + galeryHeight+6);
     $('#content').height(fix);
 }
+    
+    
+    
 }
 
 jQuery(document).ready(function(){
