@@ -92,9 +92,9 @@ router.get('/player', (req, res) => {
                 let script;
                 if(result[0]['passed']){
                     script = 'player.js';
-                    console.log(user.user_id + ' зашёл в плеер в первый раз. Смотрит ' + result[0]['text']);
+                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер в первый раз. Смотрит ' + result[0]['text']);
                 }else{
-                    console.log(user.user_id + ' зашёл в плеер снова. Смотрит ' + result[0]['text']);
+                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер снова. Смотрит ' + result[0]['text']);
                     script = 'noclip_player.js';
                 }
                     
@@ -126,7 +126,7 @@ router.get('/player', (req, res) => {
 router.get('/stream', (req, res) =>{
     let user = req.session.user;
     if(user) {
-            console.log(user.user_id + ' зашёл на стрим.');
+            console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл на стрим.');
             res.render('stream', {name:user.username, avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream'});  
     }else{
        res.redirect('/notification/noAuth'); 
@@ -144,7 +144,7 @@ router.get('/voting', (req, res) =>{
                     res.redirect('/notification/votingAlready_issues');
                 }else{
                     if(result){
-                        console.log(user.user_id + ' зашёл на голосовалку.');
+                        console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл на голосовалку.');
                     res.render('voting', {layout: 'voting', bg: 'voting', name:user.username, avatar:user.vk_image, fraction_name: translateFraction(result[0].fraction), fraction: translateFraction(user.fraction), voting: result});
                 }else{
                     res.redirect('/notification/voting_issues');
