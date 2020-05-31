@@ -47,8 +47,10 @@ document.getElementById('seriesSlider').style.height = seriesSliderHeight + "px"
     alert(galeryHeight);
     
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-    if(isChrome){
-        $('#content').height($('#content').height()-50);
+var ua = navigator.userAgent.toLowerCase();
+var isAndroid = ua.indexOf("android") > -1;
+    if(isChrome && isAndroid){
+        $('#content').height($('#content').height()-60);
     }
 //if($(document).width()<700){
 //    let fix = rootHeight - (headerHeight + galeryHeight+6);
