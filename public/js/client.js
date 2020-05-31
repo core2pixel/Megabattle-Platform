@@ -242,4 +242,4 @@ $(document).ready(function(){
     $('#frame_slider').slick('unslick');
     $('#frame_slider').remove();
 }
-}
+});
