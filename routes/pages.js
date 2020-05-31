@@ -37,7 +37,7 @@ router.get('/home', (req, res, next) => {
             render_layout.seriesByFraction(req.query.series, user.user_id, function (result) {
                 if(result){ 
                 user.currentFraction = result[0]['fraction'];
-                console.log(user.user_id + ' загрузил плейлист по факультету');
+                console.log(user.user_id + '['+translateFraction(user.currentFraction)+'] загрузил плейлист по факультету' + translateFraction(user.currentFraction));
                 res.render('series', {
                     layout: 'galery',
                     name: user.username,
@@ -60,7 +60,7 @@ router.get('/home', (req, res, next) => {
                 
                 if(result){
                 user.currentFraction = result[0]['fraction'];
-                console.log(user.user_id + '  загрузил рандомное видео');
+                console.log(user.user_id + '['+translateFraction(user.currentFraction)+'] загрузил рандомный плейлист по факультету';
                 res.render('series', {
                     layout: 'galery',
                     name: user.username,
