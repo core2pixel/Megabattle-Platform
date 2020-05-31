@@ -53,7 +53,7 @@ User.prototype = {
 
             pool.query(sql, bind, function (err, result) {
                 if (err) throw err;
-                fillAccount(body, function(){
+                fillAccount(body, function(vk_image){
                     callback('ok', vk_image);
                 });
                 
