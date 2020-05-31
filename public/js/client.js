@@ -19,9 +19,7 @@ $('.profile_user-photo').click(function(){
    
 });
 
-if($(window).width() < 700){
-    $('#frame_slider').slick('unslick').remove();
-}
+
 let vh = window.innerHeight * 0.01;
 // Then we set the value in the --vh custom property to the root of the document
 document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -231,4 +229,9 @@ function checkAmount(){
         $('.btn_vote > button').text('Готово!');
         setTimeout(function(){window.location.href = "/home"}, 3000);
     }
+}
+
+
+if($(window).width() < 700){
+    $('#frame_slider').slick('unslick').remove();
 }
