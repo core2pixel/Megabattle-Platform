@@ -33,8 +33,8 @@ let controlHeight = document.getElementById('seriesControl').clientHeight;
 if(galeryHeight > 280){
     galeryHeight = 280;
 }
-if(galeryHeight < 180){
-    galeryHeight = 180;
+if(galeryHeight < 200){
+    galeryHeight = 200;
 }
 let seriesSliderHeight = galeryHeight - controlHeight;
 document.getElementById('galery').style.height = galeryHeight + "px";
@@ -236,6 +236,5 @@ function checkAmount(){
 
 
 if($(window).width() < 700){
-    $('#frame_slider').slick('unslick');
-    $('#frame_slider').remove();
+    alert('Less than 960');
 }
