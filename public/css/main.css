@@ -353,7 +353,7 @@ li{
 
 .videoPoster{
     float: left;
-    width: 350px;
+    width: 230px;
     height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -574,7 +574,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1f0d35",endCo
 .streamEffects > img{
 }
 .videoPoster_ftmi{
-    width: 230px;
+    
 }
 
 /*Voting*/
