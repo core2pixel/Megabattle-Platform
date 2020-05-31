@@ -75,6 +75,8 @@ $('#seriesSlider').slick({
   ]
     
 });
+    
+    if(!($(document).width()<700)){
     $('#frame_slider').slick({
         infinite: true,
         slidesToShow: 1,
@@ -86,6 +88,8 @@ $('#seriesSlider').slick({
         swipe: false
 
     });
+}
+    
 });
 
 $('#slide_back').click(function(){
@@ -237,10 +241,3 @@ function checkAmount(){
 
 
 
-$(document).ready(function(){
-    console.log($(document).width());
-  if(($(document).width()<700)){
-    $('#frame_slider').slick('unslick');
-    $('#frame_slider').remove();
-}
-});
