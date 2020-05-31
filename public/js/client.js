@@ -33,8 +33,8 @@ let controlHeight = document.getElementById('seriesControl').clientHeight;
 if(galeryHeight > 280){
     galeryHeight = 280;
 }
-if(galeryHeight < 180){
-    galeryHeight = 180;
+if(galeryHeight < 160){
+    galeryHeight = 160;
 }
 let seriesSliderHeight = galeryHeight - controlHeight;
 document.getElementById('galery').style.height = galeryHeight + "px";
