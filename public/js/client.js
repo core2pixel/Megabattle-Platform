@@ -34,7 +34,7 @@ if(galeryHeight > 280){
     galeryHeight = 280;
 }
 
-if(galeryHeight > 160 && $(window).width<700){
+if(galeryHeight > 160 && $(document).width()<700){
     galeryHeight = 160;
 }
 alert(galeryHeight);
