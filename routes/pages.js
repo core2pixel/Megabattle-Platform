@@ -180,7 +180,7 @@ router.get('/vk_register', (req, res)=>{
             req.session.user.fraction = fraction;
               
               console.log(result);
-            //req.session.user.vk_image = body['response'][0].photo_200;
+            req.session.user.vk_image = result[0].photo_200;
             req.session.opp = 0;
               
             res.redirect('/home');
