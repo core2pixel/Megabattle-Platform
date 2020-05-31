@@ -236,6 +236,7 @@ function checkAmount(){
 }
 
 if($(document).width()<700){
+    console.log($(document).width());
     $('#frame_slider').slick('unslick');
     $('#frame_slider').remove();
 }
