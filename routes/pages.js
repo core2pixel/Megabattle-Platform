@@ -60,7 +60,7 @@ router.get('/home', (req, res, next) => {
                 
                 if(result){
                 user.currentFraction = result[0]['fraction'];
-                console.log(user.user_id + '['+translateFraction(user.currentFraction)+'] загрузил рандомный плейлист по факультету';
+                console.log(user.user_id + '['+translateFraction(user.currentFraction)+'] загрузил рандомный плейлист по факультету' + translateFraction(user.currentFraction));
                 res.render('series', {
                     layout: 'galery',
                     name: user.username,
