@@ -18,9 +18,9 @@ $('.profile_user-photo').click(function(){
     }
    
 });
-
-function contentFix(){
 $('.page_wrapper').height(window.innerHeight);
+function contentFix(){
+
 let headerHeight = document.getElementById('header').clientHeight;
 let contentHeight = document.getElementById('content').clientHeight;
 let rootHeight = document.getElementById('root').clientHeight;
