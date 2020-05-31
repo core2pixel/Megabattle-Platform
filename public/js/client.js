@@ -88,6 +88,8 @@ $('#seriesSlider').slick({
         swipe: false
 
     });
+}else{
+    $('#frame_slider').remove();
 }
     
 });
