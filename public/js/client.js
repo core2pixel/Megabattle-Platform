@@ -235,9 +235,11 @@ function checkAmount(){
     }
 }
 
-if($(document).width()<700){
-    console.log($(document).width());
+
+
+$(document).ready(function(){
+  if($(document).width()<700){
     $('#frame_slider').slick('unslick');
     $('#frame_slider').remove();
 }
-
+}
