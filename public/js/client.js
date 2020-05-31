@@ -233,6 +233,7 @@ function checkAmount(){
 
 
 if($(window).width() < 700){
+    console.log($(window).width());
     $('#frame_slider').slick('unslick');
     $('#frame_slider').remove();
 }
