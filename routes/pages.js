@@ -173,15 +173,12 @@ router.get('/vk_register', (req, res)=>{
       let fraction = state.split('/')[1];
       body['username'] = username;
       body['fraction'] = fraction;
-      user.create(body, function(result){
+      user.create(body, function(result, vk_image){
           
           if(result === 'ok'){
             req.session.user = body;
             req.session.user.fraction = fraction;
-              
-              console.log('vk_image');
-              console.log(body);
-            req.session.user.vk_image = result[0]['photo_200'];
+            req.session.user.vk_image = vk_image;
             req.session.opp = 0;
               
             res.redirect('/home');

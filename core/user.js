@@ -75,7 +75,7 @@ User.prototype = {
                 if (err) throw err;
                 console.log(sql);
                 console.log(result);
-                callback(body);
+                callback(body, body['response'][0].photo_200);
             });
                     
                 }
