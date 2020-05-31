@@ -116,7 +116,7 @@ Render.prototype = {
         let sql = `SELECT * FROM voting WHERE (is_enabled = 1 AND fraction !='`+user_fraction+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log(result);
+            
             if (result.length) {
                 checkProgress(result[0]['type'], vk_id, result);
             } else {
@@ -125,10 +125,12 @@ Render.prototype = {
         });
         
         function checkProgress(type, vk_id, data){
-        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3) LIMIT 5`;
+        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3)`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            if (result.length === 3) {
+            console.log('checkprogress');
+            console.log(result);
+            if (result.length === 4) {
                 checkAlreadyVoted(type, data);
             } else {
                 callback(null);
@@ -140,20 +142,24 @@ Render.prototype = {
         let sql = `SELECT fraction FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err
+            console.log('checkAlready');
+            console.log(result);
             if (!result.length) {
                 mergeJSONVoting(data, voting, callback);
             } else {
                 if(data.length === result.length){
                     callback('voted');
                 }else{
+                    let editedJSONVoting = voting;
                    for(let i = 0; i < data.length; i++){
                     for(let x = 0; x < result.length; x++){
                         if(data[i]['fraction'] === result[x]['fraction']){
                             data.splice(i, 1);
+                            editedJSONVoting.splice(i, 1);
                         }
                     }
                 }
-                mergeJSONVoting(data, voting, callback);
+                mergeJSONVoting(data, editedJSONVoting, callback);
                 }
                 
             }
