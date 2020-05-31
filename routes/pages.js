@@ -178,6 +178,7 @@ router.get('/vk_register', (req, res)=>{
           if(result === 'ok'){
             req.session.user = body;
             req.session.user.fraction = fraction;
+            console.log(vk_image);
             req.session.user.vk_image = vk_image;
             req.session.opp = 0;
               

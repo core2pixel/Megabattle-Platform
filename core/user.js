@@ -54,7 +54,7 @@ User.prototype = {
             pool.query(sql, bind, function (err, result) {
                 if (err) throw err;
                 fillAccount(body, function(){
-                    callback('ok');
+                    callback('ok', vk_image);
                 });
                 
             });
