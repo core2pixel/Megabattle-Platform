@@ -45,6 +45,11 @@ document.getElementById('seriesSlider').style.height = seriesSliderHeight + "px"
     alert(headerHeight);
     alert(contentHeight);
     alert(galeryHeight);
+    
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    if(isChrome){
+        $('#content').height($('#content').height()-50);
+    }
 //if($(document).width()<700){
 //    let fix = rootHeight - (headerHeight + galeryHeight+6);
 //    $('#content').height(fix);
