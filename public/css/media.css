@@ -209,6 +209,19 @@
     height: 410px;
 }
 }
+@media(max-width: 330px){
+.controlType {
+    font-size: 18px;
+}
+.controlOptions {
+    display: inline-block;
+    padding-right: 0px;
+}
+ .controlOption {
+    font-size: 14px;
+}   
+    
+}
 /*Stream*/
 @media(max-width: 750px){
     .stream_container{
