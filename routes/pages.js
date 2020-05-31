@@ -203,7 +203,7 @@ router.get('/vk_login', (req, res) =>{
           if(result!=='No such account'){
             req.session.user = body;
             req.session.opp = 0;
-            console.log(user.user_id + ' вошёл в систему');
+            console.log(body['user_id'] + ' вошёл в систему');
             res.redirect('/home');
           }else{
               res.redirect('/notification/wasntegistered');
