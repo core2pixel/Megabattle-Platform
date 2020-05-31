@@ -41,8 +41,8 @@ let seriesSliderHeight = galeryHeight - controlHeight;
 document.getElementById('galery').style.height = galeryHeight + "px";
 document.getElementById('seriesSlider').style.height = seriesSliderHeight + "px";
 if($(document).width()<700){
-//    let fix = rootHeight - (headerHeight + galeryHeight);
-//    $('#content').height(fix);
+    let fix = rootHeight - (headerHeight + galeryHeight);
+    $('#content').height(fix);
 }
 }
 
