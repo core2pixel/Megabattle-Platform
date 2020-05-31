@@ -573,7 +573,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1f0d35",endCo
 }
 .streamEffects > img{
 }
-
+.videoPoster_ftmi{
+    width: 230px;
+}
 
 /*Voting*/
 .vote {
