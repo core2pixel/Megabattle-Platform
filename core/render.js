@@ -1,9 +1,9 @@
 const pool = require('./pool');
 let series = [
-{"id":"1","name":"Ленинградский эксперимент","youtube_link":"L0blnTRD2qU","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false},
-{"id":"3","name":"Ленинградский эксперимент","youtube_link":"K09_5IsgGe8","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false},
-{"id":"4","name":"Ленинградский эксперимент","youtube_link":"jPan651rVMs","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false},
-{"id":"6","name":"Ленинградский эксперимент","youtube_link":"pz1ztvu77FM","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false}
+{"id":"1","name":"Ленинградский эксперимент","youtube_link":"L0blnTRD2qU","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета Фотоники"},
+{"id":"3","name":"Ленинградский эксперимент","youtube_link":"K09_5IsgGe8","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета ФТМИ"},
+{"id":"4","name":"Ленинградский эксперимент","youtube_link":"jPan651rVMs","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета КТиУ"},
+{"id":"6","name":"Ленинградский эксперимент","youtube_link":"pz1ztvu77FM","descr":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","year":"2020","genre":"Комедия","duration":"4 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета БТИНС"}
 ]
 let voting = [
 {"id":"1","fraction":"mff","fraction_name":"МФФ","type":"banger","is_enabled":"1"},
@@ -21,6 +21,7 @@ let bangers = [
 {"id":"5","name":"Ленинградский эксперимент","text":"Бэнгер факультета КТиУ","fraction":"ktu","youtube_link":"oYhB8F7LF2I","bangers_is_enabled":"1"},
 {"id":"6","name":"Ленинградский эксперимент","text":"Бэнгер факультета БТИНС","fraction":"btins","youtube_link":"g9wFQTzRfog","bangers_is_enabled":"1"}
 ]
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -198,13 +199,53 @@ Render.prototype = {
             if (err) throw err
             if (result.length != 0 && result[0]['points'] == 3) {
                 data[0]['passed'] = true;
-                callback(data);
+                if(type === 'bangers'){
+                    mergeJSONBangersPlayer(data, bangers, callback);
+                }
+                if(type === 'series'){
+                    mergeJSONSeriesPlayer(data, series, callback);
+                }
             } else {
                 data[0]['passed'] = false;
-                callback(data);
+                if(type === 'bangers'){
+                    mergeJSONBangersPlayer(data, bangers, callback);
+                }
+                if(type === 'series'){
+                    mergeJSONSeriesPlayer(data, series, callback);
+                }
             }
         });    
         }
+        
+        
+        function mergeJSONSeriesPlayer(original, needed, callback){
+    for(let i = 0; i < original.length; i++){
+        for(let x = 0; x < needed.length; x++){
+            if(original[i]['fraction']===needed[x]['fraction']){
+                original[i]['name'] = needed[x]['name'];
+                original[i]['descr'] = needed[x]['descr'];
+                original[i]['fraction_name'] = needed[x]['fraction_name'];
+                original[i]['duration'] = needed[x]['duration'];
+                original[i]['genre'] = needed[x]['genre'];
+                original[i]['text'] = needed[x]['text'];
+            }
+            
+        }
+    }
+    callback(original);
+}
+        function mergeJSONBangersPlayer(original, needed, callback){
+    for(let i = 0; i < original.length; i++){
+        for(let x = 0; x < needed.length; x++){
+            if(original[i]['fraction']===needed[x]['fraction']){
+                original[i]['name'] = needed[x]['name'];
+                original[i]['text'] = needed[x]['text'];
+            }
+            
+        }
+    }
+    callback(original);
+}
     }
 
 }
