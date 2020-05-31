@@ -44,7 +44,7 @@ app.use('/notification', notificationRouter);
 // Errors => page not found 404
 app.use((req, res, next) =>  {
     var err = new Error('Page not found');
-    res.render('404', {layout: '404', message: 'Эта страница не существует', action: '/home'});
+    res.render('404', {layout: '404', message: 'Эта страница не существует', action: '/home', bg: 'player1'});
     err.status = 404;
     //next(err);
 })
@@ -52,7 +52,7 @@ app.use((req, res, next) =>  {
 // Handling errors (send them to the client)
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.render('404', {layout: '404', message: err.message, action: '/home'});
+    res.render('404', {layout: '404', message: err.message, action: '/home', bg: 'splash1'});
 });
 
 

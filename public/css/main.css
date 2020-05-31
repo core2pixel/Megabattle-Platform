@@ -62,6 +62,9 @@ a{
     background:  url(../img/filter.png) center no-repeat, rgba(31, 13, 53, 0.85);
     background-size: cover;
 }
+.wrapper_background-player{
+    background: rgba(31, 13, 53, 0.85) !important;
+}
 .galery_container{
     position: absolute;
     height: 100vh;

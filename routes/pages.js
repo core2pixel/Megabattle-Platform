@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
     }
     // IF not we just send the index page.
     
-    res.render('login', {layout: 'auth'});
+    res.render('login', {layout: 'auth',  bg: 'login'});
 })
 
 // Get home page
@@ -47,7 +47,8 @@ router.get('/home', (req, res, next) => {
                     banger_is_enabled: result[0]['bangers_is_enabled'],
                     series_is_enabled: result[0]['series_is_enabled'],
                     like: result[0]['like'],
-                    fraction: translateFraction(user.fraction)
+                    fraction: translateFraction(user.fraction),
+                    fraction_code: user.fraction
                 });    
                 }else{
                     res.redirect('/notification/noFractionSeries_issues');
@@ -69,7 +70,8 @@ router.get('/home', (req, res, next) => {
                     banger_is_enabled: result[0]['bangers_is_enabled'],
                     series_is_enabled: result[0]['series_is_enabled'],
                     like: result[0]['like'],
-                    fraction: translateFraction(user.fraction)
+                    fraction: translateFraction(user.fraction),
+                    fraction_code: user.fraction
                 });    
                 }else{
                     res.redirect('/notification/renderSeries_issues');
@@ -101,7 +103,8 @@ router.get('/player', (req, res) => {
                     vk_id: user.vk_id,
                     avatar: user.vk_image,
                     script: script,
-                    fraction: translateFraction(user.fraction)
+                    fraction: translateFraction(user.fraction),
+                    bg: 'player'
                 });    
                 }else{
                     res.redirect('/notification/player_issues');
@@ -120,7 +123,7 @@ router.get('/player', (req, res) => {
 router.get('/stream', (req, res) =>{
     let user = req.session.user;
     if(user) {
-            res.render('stream', {name:user.username, avatar:user.vk_image, fraction: translateFraction(user.fraction)});  
+            res.render('stream', {name:user.username, avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream'});  
     }else{
        res.redirect('/notification/noAuth'); 
     }
@@ -137,7 +140,7 @@ router.get('/voting', (req, res) =>{
                     res.redirect('/notification/votingAlready_issues');
                 }else{
                     if(result){
-                    res.render('voting', {layout: 'voting', name:user.username, avatar:user.vk_image, fraction_name: translateFraction(result[0].fraction), fraction: translateFraction(user.fraction), voting: result});
+                    res.render('voting', {layout: 'voting', bg: 'voting', name:user.username, avatar:user.vk_image, fraction_name: translateFraction(result[0].fraction), fraction: translateFraction(user.fraction), voting: result});
                 }else{
                     res.redirect('/notification/voting_issues');
                 }
@@ -220,12 +223,12 @@ router.post('/register', (req, res, next) => {
 
 router.get('/login', (req, res) =>
   res.render('login', {
-    layout: 'auth'
+    layout: 'auth',   bg: 'login'
   })
 );
 router.get('/register', (req, res) =>
   res.render('register', {
-    layout: 'auth'
+    layout: 'auth',   bg: 'register'
   })
 );
 // Get loggout page
