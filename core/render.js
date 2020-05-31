@@ -128,7 +128,7 @@ Render.prototype = {
         let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3) LIMIT 5`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            if (result.length === 4) {
+            if (result.length === 3) {
                 checkAlreadyVoted(type, data);
             } else {
                 callback(null);
@@ -136,7 +136,7 @@ Render.prototype = {
         }); 
          
         }
-            function checkAlreadyVoted(type, data){
+        function checkAlreadyVoted(type, data){
         let sql = `SELECT fraction FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err
