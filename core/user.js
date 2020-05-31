@@ -36,7 +36,6 @@ User.prototype = {
             let sql = `SELECT * FROM users WHERE vk_id = ` + id;
             pool.query(sql, function (err, result) {
                 if (err) throw err;
-                console.log(result);
                 if (result.length === 0) {
                     createAccount(body)
                 } else {
@@ -69,10 +68,13 @@ User.prototype = {
                 if (err) {
                     return console.log(err);
                 }
+                console.log(body['response']);
                 if (typeof body['response'][0].photo_200 != 'undefined') {
                     let sql = `UPDATE users SET vk_image = '` + body['response'][0].photo_200 + `'  WHERE vk_id = ` + body['response'][0].id;
             pool.query(sql, function (err, result) {
                 if (err) throw err;
+                console.log(sql);
+                console.log(result);
                 callback(body);
             });
                     
@@ -86,7 +88,6 @@ User.prototype = {
         checkExistingAccount(body);
         function checkExistingAccount(id) {
             let sql = `SELECT * FROM users WHERE vk_id = ` + body['user_id'];
-            console.log(sql);
             pool.query(sql, function (err, result) {
                 if (err) throw err;
                 if (result.length !== 0) {
@@ -184,7 +185,6 @@ User.prototype = {
         let sql = `SELECT id FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND fraction = '`+fraction+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err;
-            console.log(type)
             if(!result.length){
                 callback(type, insertValue, messanger);
             }else{
@@ -194,7 +194,6 @@ User.prototype = {
         });    
         }
         function checkScores(type, callback, messanger){
-            console.log(type)
         let sql = `SELECT score FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`') `;
         pool.query(sql, function (err, result) {
             if (err) throw err;
@@ -214,7 +213,6 @@ User.prototype = {
             return true;
         }
         function insertValue(type){
-            console.log(type)
         let sql = `INSERT INTO voting_results (vk_id, fraction, score, user_fraction, type) VALUE('`+vk_id+`', '`+fraction+`', '`+score+`', '`+user_fraction+`', '`+type+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err;
