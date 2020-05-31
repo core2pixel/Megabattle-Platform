@@ -128,7 +128,7 @@ Render.prototype = {
         let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3)`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log('checkprogress');
+            console.log(sql);
             console.log(result);
             if (result.length === 4) {
                 checkAlreadyVoted(type, data);
