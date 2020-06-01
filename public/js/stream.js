@@ -37,10 +37,13 @@ let control_points;
       function onPlayerStateChange(event) {
         
         if (event.data == YT.PlayerState.PAUSE) {
+            clearInterval(timer);
         }
         if (event.data == YT.PlayerState.BUFFERING) {
+            clearInterval(timer);
         }
         if (event.data == YT.PlayerState.PLAYING) {
+            timer = setInterval(function(){checkTime(checkControlPoints); }, 5000);
         }
       }
       function stopVideo() {
