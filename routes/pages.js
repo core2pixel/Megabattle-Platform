@@ -24,8 +24,6 @@ let dev_mode = false;
 
 let access;
 if(!dev_mode){
-
-console.log(req.get('host'));
 }else{
     host = host_test;
     key = key_test;
