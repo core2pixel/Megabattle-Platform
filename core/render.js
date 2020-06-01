@@ -1,8 +1,8 @@
 const pool = require('./pool');
 let series = [
-{"id":"1","name":"Ленинградский эксперимент","youtube_link":"q0YWP0QKZQs","descr":"Путешествия во времени невозможны. Только если у тебя нет таинственного кристалла. Но будь осторожен. У всего в этом мире есть последствия.","year":"2020","genre":"Фантастика","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета Фотоники"},
-{"id":"3","name":"Обратная сторона звезды","youtube_link":"K09_5IsgGe8","descr":"Инопланетяне ближе, чем вы думаете. Возможно, вы даже знаете их песни, ходите на их концерты, покупаете одежду их лейбла и едите их бургеры. Пришло время во всем разобраться.","year":"2020","genre":"Расследование","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета ФТМИ"},
-{"id":"4","name":"Ктукла","youtube_link":"GShDe1sk4b8","descr":"Игра вышла из-под контроля. Теперь не смешно уже никому. Обычная кукла принесла слишком много проблем. Как спасти себя и друзей от старого проклятья?","year":"2020","genre":"Ужасы","duration":"5 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета КТиУ"},
+{"id":"1","name":"Ленинградский эксперимент","youtube_link":"q0YWP0QKZQs","descr":"Путешествия во времени невозможны. Только если у тебя нет таинственного кристалла. Но будь осторожен. У всего в этом мире есть последствия.","year":"2020","genre":"Фантастика","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":true,"series_is_enabled":false, likes: false, text: "Эпизод факультета Фотоники"},
+{"id":"3","name":"Обратная сторона звезды","youtube_link":"iX7Q0fYDvdw","descr":"Инопланетяне ближе, чем вы думаете. Возможно, вы даже знаете их песни, ходите на их концерты, покупаете одежду их лейбла и едите их бургеры. Пришло время во всем разобраться.","year":"2020","genre":"Расследование","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":true,"series_is_enabled":false, likes: false, text: "Эпизод факультета ФТМИ"},
+{"id":"4","name":"Ктукла","youtube_link":"iX7Q0fYDvdw","descr":"Игра вышла из-под контроля. Теперь не смешно уже никому. Обычная кукла принесла слишком много проблем. Как спасти себя и друзей от старого проклятья?","year":"2020","genre":"Ужасы","duration":"5 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":true,"series_is_enabled":false, likes: false, text: "Эпизод факультета КТиУ"},
 {"id":"6","name":"Скрываясь за маской","youtube_link":"Pf7soG40Hrk","descr":"Маски в Instagram прочно вошли в нашу жизнь. А в жизнь четырех друзей даже слишком прочно. Виртуальный мир перешел в реальность. Теперь им остается только открыть свое истинное лицо, чтобы стать свободными.","year":"2020","genre":"Комедия","duration":"5 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":true,"series_is_enabled":false, likes: false, text: "Эпизод факультета БТИНС"}
 ]
 let voting = [
@@ -17,7 +17,7 @@ let voting = [
 ]
 let bangers = [
 {"id":"1","name":"Бэнгер","text":"Бэнгер факультета Фотоники","fraction":"mff","youtube_link":"q0YWP0QKZQs","bangers_is_enabled":false},
-{"id":"4","name":"Бэнгер","text":"Бэнгер ФТМИ","fraction":"ftmi","youtube_link":"5mm163wWKL8","bangers_is_enabled":false},
+{"id":"4","name":"Бэнгер","text":"Бэнгер ФТМИ","fraction":"ftmi","youtube_link":"iX7Q0fYDvdw","bangers_is_enabled":false},
 {"id":"5","name":"Бэнгер","text":"Бэнгер факультета КТиУ","fraction":"ktu","youtube_link":"GShDe1sk4b8","bangers_is_enabled":false},
 {"id":"6","name":"Бэнгер","text":"Бэнгер факультета БТИНС","fraction":"btins","youtube_link":"Pf7soG40Hrk","bangers_is_enabled":false}
 ]
@@ -224,6 +224,7 @@ Render.prototype = {
                 original[i]['duration'] = needed[x]['duration'];
                 original[i]['genre'] = needed[x]['genre'];
                 original[i]['text'] = needed[x]['text'];
+                original[i]['youtube_link'] = needed[x]['youtube_link'];
             }
             
         }
@@ -236,6 +237,7 @@ Render.prototype = {
             if(original[i]['fraction']===needed[x]['fraction']){
                 original[i]['name'] = needed[x]['name'];
                 original[i]['text'] = needed[x]['text'];
+                original[i]['youtube_link'] = needed[x]['youtube_link'];
             }
             
         }
