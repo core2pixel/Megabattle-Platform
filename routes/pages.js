@@ -116,8 +116,9 @@ router.get('/player', (req, res) => {
                     script = 'player.js';
                     console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер в первый раз. Смотрит ' + result[0]['text']);
                 }else{
-                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер снова. Смотрит ' + result[0]['text']);
                     script = 'noclip_player.js';
+                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер снова. Смотрит ' + result[0]['text']);
+                    
                 }
                     
                 res.render('player', {

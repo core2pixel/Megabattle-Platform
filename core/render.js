@@ -194,7 +194,7 @@ Render.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length != 0 && result[0]['points'] == 3) {
-                data[0]['passed'] = false;
+                data[0]['passed'] = true;
                 if(type === 'bangers'){
                     mergeJSONBangersPlayer(data, bangers, callback);
                 }
