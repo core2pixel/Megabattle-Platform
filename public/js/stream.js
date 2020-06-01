@@ -23,70 +23,11 @@ let control_points;
       function onPlayerReady(event) {
         let duration = 13;
         let control_point = duration/4;
-        control_points = [control_point, control_point*2, control_point*3];
+        control_points = [4, 7, 10, 13];
         console.log(control_points);
+        player.seekTo(0, true);  
         player.playVideo();
       }
-
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      let timer;
-    let last_time = 0;
-      function onPlayerStateChange(event) {
-        
-        if (event.data == YT.PlayerState.PAUSE) {
-            clearInterval(timer);
-        }
-        if (event.data == YT.PlayerState.BUFFERING) {
-            clearInterval(timer);
-        }
-        if (event.data == YT.PlayerState.PLAYING) {
-            timer = setInterval(function(){checkTime(checkControlPoints); }, 5000);
-        }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
-    function checkControlPoints(time){
-        let delta1 = Math.abs(time - control_points[0]);
-        let delta2 = Math.abs(time - control_points[1]);
-        let delta3 = Math.abs(time - control_points[2]);
-        if(delta1 < 6 || delta2 < 6 || delta3 < 6){
-            if(time > control_points[0] && Math.abs(time - control_points[0]) < 7){
-                console.log(1);
-                savePoints(1);
-            }
-            if(time > control_points[1] && Math.abs(time - control_points[1]) < 7){
-                console.log(2);
-                savePoints(2);
-            }
-            if(time > control_points[2] && Math.abs(time - control_points[2]) < 7){
-                console.log(3);
-                savePoints(3);
-            }
-        }
-        
-    }
-    
-    function checkTime(callback){
-        let time = player.getCurrentTime();
-        console.log('time');
-        console.log(player.getCurrentTime());
-        let delta = time - last_time;
-        console.log(delta);
-        if(delta < 6){
-            last_time = time;
-            callback(time);
-        }else{
-            preventCheating();
-        }
-        
-    }
-    function preventCheating(){
-        player.seekTo(last_time, true);
-    }
 
     function savePoints(point){
     $.ajax({
