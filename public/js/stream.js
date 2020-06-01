@@ -48,7 +48,6 @@ let control_points;
       }
 function checkControlPoints(time){
  }
-        }
         
     }
       function stopVideo() {
