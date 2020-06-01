@@ -24,6 +24,15 @@ user.likes(user_id, currentFraction, function(result){
     
 });
 });
+router.post('/stream', (req, res, next) => {
+let sessionLike = req.session.user;
+let user_id = sessionLike.user_id;
+console.log(req.body.link);
+console.log(req.body.points);
+//user.stream(user_id, currentFraction, function(result){
+//    
+//});
+});
 router.post('/voting', (req, res, next) => {
 let sessionVk = req.session.user;
 user.voting(sessionVk.user_id, req.body.fraction, req.body.value,  sessionVk.fraction, function(result){
