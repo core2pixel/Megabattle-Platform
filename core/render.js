@@ -86,7 +86,6 @@ Render.prototype = {
         let sql = `SELECT id FROM likes WHERE (fraction = '`+fraction+`' AND vk_id = '`+vk_id+`') `;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log(sql);
             if (result.length > 0) {
                 data[0]['like'] = true;
                 mergeJSONSeries(data, series, callback);
@@ -122,7 +121,6 @@ Render.prototype = {
             if (err) throw err
             
             if (result.length) {
-                console.log(result);
                 checkProgress(result[0]['type'], vk_id, result);
             } else {
                 callback(null);
@@ -130,11 +128,9 @@ Render.prototype = {
         });
         
         function checkProgress(type, vk_id, data){
-        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3)`;
+        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND (points = 3 OR points = 4))`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log(sql);
-            console.log(result);
             if (result.length === 4) {
                 checkAlreadyVoted(type, data);
             } else {
@@ -147,8 +143,6 @@ Render.prototype = {
         let sql = `SELECT fraction FROM voting_results WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log('checkAlready');
-            console.log(result);
             if (!result.length) {
                 mergeJSONVoting(data, voting, callback);
             } else {

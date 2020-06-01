@@ -56,7 +56,7 @@ router.get('/home', (req, res, next) => {
         }
         
         render_layout.seriesByFraction(episode, user.user_id, function (result) {
-            console.log(result);
+
                 if(result){ 
                 user.currentFraction = result[0]['fraction'];
                 console.log(user.user_id + '['+translateFraction(user.fraction)+'] загрузил плейлист по факультету ' + translateFraction(user.currentFraction));
@@ -200,7 +200,6 @@ router.get('/vk_register', (req, res)=>{
           if(result === 'ok'){
             req.session.user = body;
             req.session.user.fraction = fraction;
-            console.log(vk_image);
             req.session.user.vk_image = vk_image['response'][0].photo_200;
             req.session.opp = 0;
             console.log(username + ' из '+fraction+' зарегистрировался');

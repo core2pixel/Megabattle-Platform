@@ -26,23 +26,26 @@ User.prototype = {
             }
         });
     },
-    stream: function (vk_id, link, points, fraction, callback) {
+    stream: function (vk_id, link, points, fraction, type, callback) {
         let sql = `SELECT * FROM stream WHERE vk_id = '`+vk_id+`' ` ;
 
         pool.query(sql, function (err, result) {
             if (err) throw err
-                
-            if (result.length && points < 10) {
+            if (result.length && points < 5) {
                 updateString();
-            } else if(!result.length && points < 10) {
+            } else if(!result.length && points < 5) {
                 createString();
             }
+            
         });
         
         function updateString(){
             let sql = `UPDATE stream SET points = '`+points+`' WHERE vk_id = '`+vk_id+`'  ` ;
         pool.query(sql, function (err, result) {
             if (err) throw err
+            if(points === 4 || points === '4'){
+                checkEpisodes();
+            }
         });
         }
         
@@ -52,6 +55,33 @@ User.prototype = {
         pool.query(sql, function (err, result) {
             if (err) throw err
         });
+        }
+        
+        function checkEpisodes(){
+            let sql = `SELECT * FROM progress WHERE vk_id = '`+vk_id+`' `;
+            pool.query(sql, function (err, result) {
+            if (err) throw err
+            });
+            let status = typeof result;
+            if (status) {
+                clearEpisodes();
+            }else{
+                unlockEpisodes();
+            }
+        }
+        function unlockEpisodes(){
+            let sql = `INSERT INTO progress (vk_id, fraction, type, points, link) VALUES('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`'),('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`'),('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`'),('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`')`;
+            pool.query(sql, function (err, result) {
+            if (err) throw err
+            });
+            
+        }
+        function clearEpisodes(){
+            let sql = `DELETE FROM progress WHERE vk_id = '`+vk_id+`' `;
+            pool.query(sql, function (err, result) {
+            if (err) throw err
+            });
+            unlockEpisodes();
         }
     },
 

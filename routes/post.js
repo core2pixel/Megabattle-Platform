@@ -12,14 +12,12 @@ let user_id = sessionVk.user_id;
 let fraction = req.body.fraction;
 let type = req.body.type;    
 user.points(point,link,user_id, fraction, type, function(result){
-        console.log(result);
       });
 });
 router.post('/like', (req, res, next) => {
 let sessionLike = req.session.user;
 let user_id = sessionLike.user_id;
 let currentFraction = sessionLike.currentFraction;
-console.log(currentFraction);
 user.likes(user_id, currentFraction, function(result){
     
 });
@@ -30,7 +28,8 @@ let vk_id = sessionLike.user_id;
 let fraction = sessionLike.fraction;
 let link = req.body.link;
 let points = req.body.points;
-user.stream(vk_id, link, points, fraction, function(result){
+let type = 'banger';
+user.stream(vk_id, link, points, fraction, type, function(result){
   
 });
 });

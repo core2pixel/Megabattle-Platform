@@ -71,7 +71,6 @@ function checkControlPoints(time){
 let points = 0;
     function savePoints(){
     points++;
-    console.log(points);
     $.ajax({
   type: "POST",
   url: "/action/stream",
@@ -86,4 +85,4 @@ let points = 0;
     }
 
 
-setInterval(savePoints, 180000) 
+setInterval(savePoints, 1800000);
