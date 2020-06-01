@@ -22,7 +22,7 @@ let control_points;
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         let duration = player.getDuration();
-        control_points = [6, 7, 8];
+        control_points = [0.5, 1, 2];
         console.log(control_points);
         player.playVideo();
       }
