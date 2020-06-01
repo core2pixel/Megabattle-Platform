@@ -20,7 +20,7 @@ let host_test = 'http://localhost';
 let key_test = 's9MDB4f4bR48TQf78IV3';
 let client_id_test = '7493736';
 
-let dev_mode = true;
+let dev_mode = false;
 
 let access;
 if(!dev_mode){

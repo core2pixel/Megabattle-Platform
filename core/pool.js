@@ -4,7 +4,7 @@ const mysql = require('mysql');
  * Connection to the database.
  *  */
 
-let dev_mode = true;
+let dev_mode = false;
 let db_password;
 let db_settings;
 if(!dev_mode){
