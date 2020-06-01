@@ -37,38 +37,15 @@ let control_points;
       function onPlayerStateChange(event) {
         
         if (event.data == YT.PlayerState.PAUSE) {
-            clearInterval(timer);
         }
         if (event.data == YT.PlayerState.BUFFERING) {
-            clearInterval(timer);
         }
         if (event.data == YT.PlayerState.PLAYING) {
-            timer = setInterval(function(){checkTime(checkControlPoints); }, 5000);
         }
       }
       function stopVideo() {
         player.stopVideo();
       }
-    function checkControlPoints(time){
-        let delta1 = Math.abs(time - control_points[0]);
-        let delta2 = Math.abs(time - control_points[1]);
-        let delta3 = Math.abs(time - control_points[2]);
-        if(delta1 < 6 || delta2 < 6 || delta3 < 6){
-            if(time > control_points[0] && Math.abs(time - control_points[0]) < 7){
-                console.log(1);
-                savePoints(1);
-            }
-            if(time > control_points[1] && Math.abs(time - control_points[1]) < 7){
-                console.log(2);
-                savePoints(2);
-            }
-            if(time > control_points[2] && Math.abs(time - control_points[2]) < 7){
-                console.log(3);
-                savePoints(3);
-            }
-        }
-        
-    }
     
     function checkTime(callback){
         let time = player.getCurrentTime();
@@ -76,7 +53,6 @@ let control_points;
         console.log(delta);
         if(delta < 6){
             last_time = time;
-            callback(time);
         }else{
             preventCheating();
         }
@@ -85,12 +61,13 @@ let control_points;
     function preventCheating(){
         player.seekTo(last_time, true);
     }
-
-    function savePoints(point){
+let points = 0;
+    function savePoints(0){
+    points++;
     $.ajax({
   type: "POST",
   url: "/action/stream",
-  data: "link="+link+"&point="+point ,
+  data: "link="+link+"&points="+points ,
   success: function(msg){
     console.log(msg);
   },
@@ -99,3 +76,6 @@ let control_points;
   }       
 });
     }
+
+
+setInterval(savePoints, 3000) 
