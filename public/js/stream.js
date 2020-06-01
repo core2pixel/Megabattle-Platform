@@ -27,11 +27,11 @@ let control_points;
         console.log(control_points);
         
         player.playVideo();
-        player.seekTo(0);  
+         
       }
 
 
-
+setTimeout(player.seekTo(0), 2000);
 
 function onPlayerStateChange(event) {
         
