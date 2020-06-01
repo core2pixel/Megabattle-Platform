@@ -127,7 +127,7 @@ router.get('/stream', (req, res) =>{
     let user = req.session.user;
     if(user) {
             console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл на стрим.');
-            res.render('stream', {name:user.username, avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream', link: '5qap5aO4i9A'});  
+            res.render('stream',  {name:user.username,layout: 'stream', avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream', link: '5qap5aO4i9A'});  
     }else{
        res.redirect('/notification/noAuth'); 
     }
