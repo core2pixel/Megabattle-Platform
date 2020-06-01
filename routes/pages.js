@@ -114,10 +114,10 @@ router.get('/player', (req, res) => {
                 let script;
                 if(result[0]['passed']){
                     script = 'player.js';
-                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер в первый раз. Смотрит ' + result[0]['text']);
+                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер снова. Смотрит ' + result[0]['text']);
                 }else{
                     script = 'noclip_player.js';
-                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в плеер снова. Смотрит ' + result[0]['text']);
+                    console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл в первый раз. Смотрит ' + result[0]['text']);
                     
                 }
                     
