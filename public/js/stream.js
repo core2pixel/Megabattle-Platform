@@ -46,6 +46,11 @@ let control_points;
             timer = setInterval(function(){checkTime(checkControlPoints); }, 5000);
         }
       }
+function checkControlPoints(time){
+ }
+        }
+        
+    }
       function stopVideo() {
         player.stopVideo();
       }
