@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Megabattle Platform</title>
+    <title>Megabattle Platform Player</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/media.css" rel="stylesheet">
@@ -16,13 +16,21 @@
 </head>
 <body>
 
-<div class="page_container" id="root" style="background: url(img/backgrounds/{{{bg}}}.png) center no-repeat;">
-    <div class="page_wrapper wrapper_background" id="page_wrapper">
-      {{> header}}
-       {{{body}}}
+
+<div class="page_container" id="root" style="background: url(img/backgrounds/{{{bg}}}) center no-repeat;">
+    <div class="page_wrapper wrapper_background" id="page_wrapper"> 
+         <div class="galery_wrapper">
+             <div class="galery_container">
+             {{> header}}
+               {{{body}}}     
+         </div>
+         </div>
     </div>
 </div>
-<script src="js/react.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/slick.min.js"></script>
 <script src="js/client.js"></script>
+<script src="js/render.js"></script>
+<script src="js/stream.js"></script>
 </body>
 </html>
