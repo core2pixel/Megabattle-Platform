@@ -31,7 +31,7 @@ console.log(req.body.link);
 console.log(req.body.points);
 user.stream(user_id, req.body.link, req.body.points, function(result){
 //    
-//});
+});
 });
 router.post('/voting', (req, res, next) => {
 let sessionVk = req.session.user;

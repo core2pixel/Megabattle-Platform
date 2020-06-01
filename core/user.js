@@ -41,11 +41,11 @@ User.prototype = {
         
         function updateString(){
             let sql = `UPDATE stream SET points = '`+points+`' WHERE vk_id = '`+vk_id+`'  ` ;
-
         pool.query(sql, function (err, result) {
             if (err) throw err
         });
         }
+        
         function createString(){
             let sql = `INSERT INTO stream (points, link, vk_id) VALUES('`+points+`, '`+link+`, ,'`+vk_id+`')`;
 
