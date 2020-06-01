@@ -88,7 +88,7 @@ let control_points;
     function savePoints(point){
     $.ajax({
   type: "POST",
-  url: "/action/stream,
+  url: "/action/stream",
   data: "link="+link+"&point="+point,
   success: function(msg){
     console.log(msg);
