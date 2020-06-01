@@ -21,8 +21,9 @@
 let control_points;
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
-        let duration = player.getDuration();
-        control_points = [0.5, 1, 2];
+        let duration = 13;
+        let control_point = duration/4;
+        control_points = [control_point, control_point*2, control_point*3];
         console.log(control_points);
         player.playVideo();
       }
@@ -71,6 +72,8 @@ let control_points;
     
     function checkTime(callback){
         let time = player.getCurrentTime();
+        console.log('time');
+        console.log(getCurrentTime);
         let delta = time - last_time;
         console.log(delta);
         if(delta < 6){
