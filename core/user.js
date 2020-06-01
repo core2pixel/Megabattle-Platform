@@ -47,7 +47,7 @@ User.prototype = {
         }
         
         function createString(){
-            let sql = `INSERT INTO stream (points, link, vk_id) VALUES('`+points+`', '`+link+`, ,'`+vk_id+`')`;
+            let sql = `INSERT INTO stream (points, link, vk_id,) VALUES('`+points+`','`+link+`','`+vk_id+`') `;
 
         pool.query(sql, function (err, result) {
             if (err) throw err
