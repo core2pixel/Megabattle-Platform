@@ -25,8 +25,9 @@ let control_points;
         let control_point = duration/4;
         control_points = [4, 7, 10, 13];
         console.log(control_points);
-        player.seekTo(player.getDuration(), true);  
+        
         player.playVideo();
+        player.seekTo(0);  
       }
 
 
