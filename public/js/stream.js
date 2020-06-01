@@ -62,7 +62,7 @@ let control_points;
         player.seekTo(last_time, true);
     }
 let points = 0;
-    function savePoints(0){
+    function savePoints(){
     points++;
     $.ajax({
   type: "POST",
