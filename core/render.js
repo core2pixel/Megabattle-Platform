@@ -128,7 +128,7 @@ Render.prototype = {
         });
         
         function checkProgress(type, vk_id, data){
-        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND (points = 3 OR points = 4))`;
+        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND points = 3)`;
         pool.query(sql, function (err, result) {
             if (err) throw err
             if (result.length === 4) {
