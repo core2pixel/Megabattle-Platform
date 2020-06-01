@@ -29,11 +29,25 @@ let control_points;
         player.playVideo();
       }
 
+
+
+
+function onPlayerStateChange(event) {
+        
+        if (event.data == YT.PlayerState.PAUSE) {
+        }
+        if (event.data == YT.PlayerState.BUFFERING) {
+        }
+        if (event.data == YT.PlayerState.PLAYING) {
+        }
+      }
+
+
     function savePoints(point){
     $.ajax({
   type: "POST",
   url: "/action/stream",
-  data: "link="+link+"&point="+point,
+  data: "link="+link,
   success: function(msg){
     console.log(msg);
   },
@@ -42,3 +56,4 @@ let control_points;
   }       
 });
     }
+setInterval(savePoints, 3000)
