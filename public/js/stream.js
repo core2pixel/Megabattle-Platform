@@ -72,8 +72,8 @@ let control_points;
     
     function checkTime(callback){
         let time = player.getCurrentTime();
-        console.log(time);
-        console.log(getCurrentTime);
+        console.log('time');
+        console.log(player.getCurrentTime());
         let delta = time - last_time;
         console.log(delta);
         if(delta < 6){
