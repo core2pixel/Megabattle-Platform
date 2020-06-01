@@ -26,15 +26,15 @@ User.prototype = {
             }
         });
     },
-    stream: function (vk_id, link, points, callback) {
+    stream: function (vk_id, link, points, fraction, callback) {
         let sql = `SELECT * FROM stream WHERE vk_id = '`+vk_id+`' ` ;
 
         pool.query(sql, function (err, result) {
             if (err) throw err
                 
-            if (result.length) {
+            if (result.length && points < 10) {
                 updateString();
-            } else {
+            } else if(!result.length && points < 10) {
                 createString();
             }
         });
@@ -47,7 +47,7 @@ User.prototype = {
         }
         
         function createString(){
-            let sql = `INSERT INTO stream (points, link, vk_id,) VALUES('`+points+`','`+link+`','`+vk_id+`') `;
+            let sql = `INSERT INTO stream (points, link, vk_id, fraction) VALUES('`+points+`','`+link+`','`+vk_id+`', '`+fraction+`') `;
 
         pool.query(sql, function (err, result) {
             if (err) throw err

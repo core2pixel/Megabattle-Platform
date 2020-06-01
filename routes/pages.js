@@ -12,8 +12,25 @@ const render_layout = new Render();
 const session = require('express-session');
 const request = require('request');
 
-const host = 'http://mbtl.ru';
+let host = 'http://mbtl.ru';
+let key = 'xYxUYtbUNbuL6b3KAH8T';
+let client_id = '7482992';
 
+let host_test = 'http://localhost';
+let key_test = 's9MDB4f4bR48TQf78IV3';
+let client_id_test = '7493736';
+
+let dev_mode = true;
+
+let access;
+if(!dev_mode){
+
+console.log(req.get('host'));
+}else{
+    host = host_test;
+    key = key_test;
+    client_id = client_id_test;
+}
 router.get('/', (req, res, next) => {
     let user = req.session.user;
     if(user) {
@@ -32,9 +49,16 @@ router.get('/home', (req, res, next) => {
     //Проверяем вход
     if (user) {
         //Рендерим конкретную серию
+        let episode;
         let fractionSpelling = checkGetFraction(req.query.series);
         if (req.query.series !== undefined && fractionSpelling) {
-            render_layout.seriesByFraction(req.query.series, user.user_id, function (result) {
+            episode = req.query.series;
+        }else{
+            episode = 'mff';
+        }
+        
+        render_layout.seriesByFraction(episode, user.user_id, function (result) {
+            console.log(result);
                 if(result){ 
                 user.currentFraction = result[0]['fraction'];
                 console.log(user.user_id + '['+translateFraction(user.fraction)+'] загрузил плейлист по факультету ' + translateFraction(user.currentFraction));
@@ -54,30 +78,30 @@ router.get('/home', (req, res, next) => {
                 }
             });
             return;
-        } else {
-        //Рендерим рандомную серию
-            render_layout.seriesRandom(user.user_id, function (result) {
-                
-                if(result){
-                user.currentFraction = result[0]['fraction'];
-                console.log(user.user_id + '['+translateFraction(user.fraction)+'] загрузил рандомный плейлист по факультету ' + translateFraction(user.currentFraction));
-                res.render('series', {
-                    layout: 'galery',
-                    name: user.username,
-                    avatar: user.vk_image,
-                    series: result,
-                    banger_is_enabled: result[0]['bangers_is_enabled'],
-                    series_is_enabled: result[0]['series_is_enabled'],
-                    like: result[0]['like'],
-                    fraction: translateFraction(user.fraction),
-                    fraction_code: result[0]['fraction']
-                });    
-                }else{
-                    res.redirect('/notification/renderSeries_issues');
-                }
-            });
-            return;
-        }
+//        } else {
+//        //Рендерим рандомную серию
+//            render_layout.seriesRandom(user.user_id, function (result) {
+//                
+//                if(result){
+//                user.currentFraction = result[0]['fraction'];
+//                console.log(user.user_id + '['+translateFraction(user.fraction)+'] загрузил рандомный плейлист по факультету ' + translateFraction(user.currentFraction));
+//                res.render('series', {
+//                    layout: 'galery',
+//                    name: user.username,
+//                    avatar: user.vk_image,
+//                    series: result,
+//                    banger_is_enabled: result[0]['bangers_is_enabled'],
+//                    series_is_enabled: result[0]['series_is_enabled'],
+//                    like: result[0]['like'],
+//                    fraction: translateFraction(user.fraction),
+//                    fraction_code: result[0]['fraction']
+//                });    
+//                }else{
+//                    res.redirect('/notification/renderSeries_issues');
+//                }
+//            });
+//            return;
+//        }
 
     }
     res.redirect('/notification/noAuth');
@@ -166,7 +190,7 @@ router.get('/vk_register', (req, res)=>{
     //Если всё хорошо
     if(typeof req.query.code != 'undefined'){
         //Запрос к API вк
-        let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri='+host+'/vk_register';
+        let request_to_vk = 'https://oauth.vk.com/access_token?client_id='+client_id+'&client_secret='+key+'&code='+req.query.code + '&redirect_uri='+host+'/vk_register';
     request(request_to_vk, { json: true }, (err, res_vk, body) => {
   if (err) { return console.log(err); }
   if(typeof body['user_id'] != 'undefined'){
@@ -181,7 +205,7 @@ router.get('/vk_register', (req, res)=>{
             console.log(vk_image);
             req.session.user.vk_image = vk_image['response'][0].photo_200;
             req.session.opp = 0;
-            console.log(username + 'из '+fraction+' зарегистрировался');
+            console.log(username + ' из '+fraction+' зарегистрировался');
             res.redirect('/home');
           }else if(result==='Account already registered'){
               res.redirect('/notification/accountAlreadyRegistered');
@@ -195,7 +219,7 @@ router.get('/vk_register', (req, res)=>{
 })
 router.get('/vk_login', (req, res) =>{
     if(typeof req.query.code != 'undefined'){
-        let request_to_vk = 'https://oauth.vk.com/access_token?client_id=7482992&client_secret=xYxUYtbUNbuL6b3KAH8T&code='+req.query.code + '&redirect_uri='+host+'/vk_login';
+        let request_to_vk = 'https://oauth.vk.com/access_token?client_id='+client_id+'&client_secret='+key+'&code='+req.query.code + '&redirect_uri='+host+'/vk_login';
         request(request_to_vk, { json: true }, (err, res_vk, body) => {
   if (err) { return console.log(err); }
   if(typeof body['user_id'] != 'undefined'){
@@ -217,13 +241,13 @@ router.get('/vk_login', (req, res) =>{
 
 // Post login data
 router.post('/login', (req, res, next) => {
-let redirect = 'https://oauth.vk.com/authorize?client_id=7482992&display=page&redirect_uri='+host+'/vk_login&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
+let redirect = 'https://oauth.vk.com/authorize?client_id='+client_id+'&display=page&redirect_uri='+host+'/vk_login&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
     res.redirect(redirect);
 });
 
 // Post register data
 router.post('/register', (req, res, next) => {
-    let redirect = 'https://oauth.vk.com/authorize?client_id=7482992&display=page&redirect_uri='+host+'/vk_register&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
+    let redirect = 'https://oauth.vk.com/authorize?client_id='+client_id+'&display=page&redirect_uri='+host+'/vk_register&scope=friends&response_type=code&v=5.107&state='+req.body.username + '/' + req.body.fraction;
     res.redirect(redirect);
 });
 

@@ -1,9 +1,9 @@
 const pool = require('./pool');
 let series = [
-{"id":"1","name":"Ленинградский эксперимент","youtube_link":"L0blnTRD2qU","descr":"Путешествия во времени невозможны. Только если у тебя нет таинственного кристалла. Но будь осторожен. У всего в этом мире есть последствия.","year":"2020","genre":"Фантастика","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета Фотоники"},
-{"id":"3","name":"Обратная сторона звезды","youtube_link":"K09_5IsgGe8","descr":"Инопланетяне ближе, чем вы думаете. Возможно, вы даже знаете их песни, ходите на их концерты, покупаете одежду их лейбла и едите их бургеры. Пришло время во всем разобраться.","year":"2020","genre":"Расследование","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета ФТМИ"},
-{"id":"4","name":"Ктукла","youtube_link":"jPan651rVMs","descr":"Игра вышла из-под контроля. Теперь не смешно уже никому. Обычная кукла принесла слишком много проблем. Как спасти себя и друзей от старого проклятья?","year":"2020","genre":"Ужасы","duration":"5 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета КТиУ"},
-{"id":"6","name":"Скрываясь за маской","youtube_link":"pz1ztvu77FM","descr":"Игра вышла из-под контроля. Теперь не смешно уже никому. Обычная кукла принесла слишком много проблем. Как спасти себя и друзей от старого проклятья?","year":"2020","genre":"Комедия","duration":"5 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":"1","series_is_enabled":"0", likes: false, text: "Эпизод факультета БТИНС"}
+{"id":"1","name":"Ленинградский эксперимент","youtube_link":"L0blnTRD2qU","descr":"Путешествия во времени невозможны. Только если у тебя нет таинственного кристалла. Но будь осторожен. У всего в этом мире есть последствия.","year":"2020","genre":"Фантастика","duration":"4 мин","fraction":"mff","fraction_name":"МФФ","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета Фотоники"},
+{"id":"3","name":"Обратная сторона звезды","youtube_link":"K09_5IsgGe8","descr":"Инопланетяне ближе, чем вы думаете. Возможно, вы даже знаете их песни, ходите на их концерты, покупаете одежду их лейбла и едите их бургеры. Пришло время во всем разобраться.","year":"2020","genre":"Расследование","duration":"4 мин","fraction":"ftmi","fraction_name":"ФТМИ","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета ФТМИ"},
+{"id":"4","name":"Ктукла","youtube_link":"jPan651rVMs","descr":"Игра вышла из-под контроля. Теперь не смешно уже никому. Обычная кукла принесла слишком много проблем. Как спасти себя и друзей от старого проклятья?","year":"2020","genre":"Ужасы","duration":"5 мин","fraction":"ktu","fraction_name":"КТиУ","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета КТиУ"},
+{"id":"6","name":"Скрываясь за маской","youtube_link":"pz1ztvu77FM","descr":"Игра вышла из-под контроля. Теперь не смешно уже никому. Обычная кукла принесла слишком много проблем. Как спасти себя и друзей от старого проклятья?","year":"2020","genre":"Комедия","duration":"5 мин","fraction":"btins","fraction_name":"БТИНС","likes":"0","bangers_is_enabled":false,"series_is_enabled":false, likes: false, text: "Эпизод факультета БТИНС"}
 ]
 let voting = [
 {"id":"1","fraction":"mff","fraction_name":"МФФ","type":"banger","is_enabled":"1"},
@@ -16,10 +16,10 @@ let voting = [
 {"id":"10","fraction":"btins","fraction_name":"БТИНС","type":"series","is_enabled":"0"}
 ]
 let bangers = [
-{"id":"1","name":"Бэнгер","text":"Бэнгер факультета Фотоники","fraction":"mff","youtube_link":"pB-GfkFu_lM","bangers_is_enabled":"1"},
-{"id":"4","name":"Бэнгер","text":"Бэнгер ФТМИ","fraction":"ftmi","youtube_link":"5mm163wWKL8","bangers_is_enabled":"1"},
-{"id":"5","name":"Бэнгер","text":"Бэнгер факультета КТиУ","fraction":"ktu","youtube_link":"oYhB8F7LF2I","bangers_is_enabled":"1"},
-{"id":"6","name":"Бэнгер","text":"Бэнгер факультета БТИНС","fraction":"btins","youtube_link":"g9wFQTzRfog","bangers_is_enabled":"1"}
+{"id":"1","name":"Бэнгер","text":"Бэнгер факультета Фотоники","fraction":"mff","youtube_link":"pB-GfkFu_lM","bangers_is_enabled":false},
+{"id":"4","name":"Бэнгер","text":"Бэнгер ФТМИ","fraction":"ftmi","youtube_link":"5mm163wWKL8","bangers_is_enabled":false},
+{"id":"5","name":"Бэнгер","text":"Бэнгер факультета КТиУ","fraction":"ktu","youtube_link":"oYhB8F7LF2I","bangers_is_enabled":false},
+{"id":"6","name":"Бэнгер","text":"Бэнгер факультета БТИНС","fraction":"btins","youtube_link":"g9wFQTzRfog","bangers_is_enabled":false}
 ]
 
 function getRandomInt(max) {
@@ -106,6 +106,8 @@ Render.prototype = {
                 original[i]['fraction_name'] = needed[x]['fraction_name'];
                 original[i]['duration'] = needed[x]['duration'];
                 original[i]['genre'] = needed[x]['genre'];
+                original[i]['bangers_is_enabled'] = needed[x]['bangers_is_enabled'];
+                original[i]['series_is_enabled'] = needed[x]['series_is_enabled'];
             }
             
         }

@@ -26,12 +26,13 @@ user.likes(user_id, currentFraction, function(result){
 });
 router.post('/stream', (req, res, next) => {
 let sessionLike = req.session.user;
-let user_id = sessionLike.user_id;
-console.log(req.body.link);
-console.log(req.body.points);
-//user.stream(user_id, req.body.link, req.body.points, function(result){
-////    
-//});
+let vk_id = sessionLike.user_id;
+let fraction = sessionLike.fraction;
+let link = req.body.link;
+let points = req.body.points;
+user.stream(vk_id, link, points, fraction, function(result){
+  
+});
 });
 router.post('/voting', (req, res, next) => {
 let sessionVk = req.session.user;

@@ -3,11 +3,20 @@ const mysql = require('mysql');
 /**
  * Connection to the database.
  *  */
+
+let dev_mode = true;
+let db_password;
+let db_settings;
+if(!dev_mode){
+    db_password = 'arwenPlatform_00';
+}else{
+    db_password = '';
+}
 const pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     user: 'root', // use your mysql username.
-    password: 'arwenPlatform_00', // user your mysql password.
+    password: db_password, // user your mysql password.
     //password: '',
     database: 'megabattle_platform',
     charset: 'utf8mb4'
