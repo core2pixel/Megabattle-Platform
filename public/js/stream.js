@@ -61,7 +61,7 @@ function checkControlPoints(time){
         if(delta < 10){
             last_time = time;
         }else{
-            preventCheating();
+            //preventCheating();
         }
         
     }
