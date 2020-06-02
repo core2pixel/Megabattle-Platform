@@ -252,7 +252,10 @@ function checkAmount(){
     let numItems = $('.field_vote').length;
     if(numItems == 0){
         $('.btn_vote > button').text('Готово!');
-        setTimeout(function(){window.location.href = "/home"}, 3000);
+        $('.btn_vote > button').click(function(){
+            window.location.href = "/home";
+        });
+        setTimeout(function(){window.location.href = "/home"}, 1500);
     }
 }
 

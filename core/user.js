@@ -43,7 +43,7 @@ User.prototype = {
             let sql = `UPDATE stream SET points = '`+points+`' WHERE vk_id = '`+vk_id+`'  ` ;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            if(points === 4 || points === '4'){
+            if(points === 3 || points === '3'){
                 checkEpisodes();
             }
         });
@@ -64,20 +64,21 @@ User.prototype = {
             });
             let status = typeof result;
             if (status) {
+                console.log(points)
                 clearEpisodes();
             }else{
                 unlockEpisodes();
             }
         }
         function unlockEpisodes(){
-            let sql = `INSERT INTO progress (vk_id, fraction, type, points, link) VALUES('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`'),('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`'),('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`'),('`+vk_id+`', '`+fraction+`', '`+type+`', '`+points+`', '`+link+`')`;
+            let sql = `INSERT INTO progress (vk_id, fraction, type, points, link) VALUES('`+vk_id+`', 'mff', '`+type+`', '`+points+`', 'q0YWP0QKZQs'),('`+vk_id+`', 'ktu', '`+type+`', '`+points+`', 'iX7Q0fYDvdw'),('`+vk_id+`', 'btins', '`+type+`', '`+points+`', 'Pf7soG40Hrk'),('`+vk_id+`', 'ftmi', '`+type+`', '`+points+`', 'iX7Q0fYDvdw')`;
             pool.query(sql, function (err, result) {
             if (err) throw err
             });
             
         }
         function clearEpisodes(){
-            let sql = `DELETE FROM progress WHERE vk_id = '`+vk_id+`' `;
+            let sql = `DELETE FROM progress WHERE vk_id = '`+vk_id+`' AND points != 3 `;
             pool.query(sql, function (err, result) {
             if (err) throw err
             });

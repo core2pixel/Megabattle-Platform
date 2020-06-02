@@ -163,7 +163,7 @@ router.get('/stream', (req, res) =>{
 router.get('/voting', (req, res) =>{
     let user = req.session.user;
     if(user) {
-            render_layout.voting(user.fraction, user.user_id, function(result){
+            render_layout.voting(user.fraction, user.user_id, function(result, fractions){
                 if(result === 'voted'){
                     res.redirect('/notification/votingAlready_issues');
                 }else{
@@ -171,7 +171,12 @@ router.get('/voting', (req, res) =>{
                         console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл на голосовалку.');
                     res.render('voting', {layout: 'voting', bg: 'voting', name:user.username, avatar:user.vk_image, fraction_name: translateFraction(result[0].fraction), fraction: translateFraction(user.fraction), voting: result});
                 }else{
-                    res.redirect('/notification/voting_issues');
+                    if(fractions !== undefined){
+                        res.redirect('/notification/votingList_issues'+createRequest(fractions));
+                    }else{
+                        res.redirect('/notification/voting_issues');
+                    }
+                    
                 }
                 }
                 
@@ -182,6 +187,15 @@ router.get('/voting', (req, res) =>{
     res.redirect('/notification/noAuth');
 });
 
+function createRequest(data){
+    let string = '?fractions=';
+    let url = '/notification/votingList_issues';
+    for(let i = 0; i < data.length; i++){
+        string = string + translateFraction(data[i]['fraction'])+',';
+        
+}
+    return string;
+}
 
 /*Авторизация*/
 router.get('/vk_register', (req, res)=>{

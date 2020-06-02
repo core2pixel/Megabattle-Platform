@@ -28,7 +28,7 @@ let vk_id = sessionLike.user_id;
 let fraction = sessionLike.fraction;
 let link = req.body.link;
 let points = req.body.points;
-let type = 'banger';
+let type = 'bangers';
 user.stream(vk_id, link, points, fraction, type, function(result){
   
 });

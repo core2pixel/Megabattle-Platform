@@ -128,12 +128,15 @@ Render.prototype = {
         });
         
         function checkProgress(type, vk_id, data){
-        let sql = `SELECT * FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND (points = 3 OR points = 4))`;
+        let sql = `SELECT fraction FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND (points = 3 OR points = 4) AND fraction != '`+user_fraction+`' )`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            if (result.length === 4) {
+            console.log(sql);
+            if (result.length > 4 || result.length === 4 || (result.length === 3 && user_fraction !== 'watcher')) {
                 checkAlreadyVoted(type, data);
-            } else {
+            }else if(result.length < 4 && result.length != 0){
+                callback(null, result);
+            }else {
                 callback(null);
             }
         }); 
@@ -190,9 +193,10 @@ Render.prototype = {
         });
         
         function checkIfCompleted(link, data, callback){
-        let sql = `SELECT points FROM progress WHERE (vk_id ='`+vk_id+`' AND link = '`+link+`')`;
+        let sql = `SELECT points FROM progress WHERE (vk_id ='`+vk_id+`' AND type = '`+type+`' AND link = '`+link+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err
+            console.log(sql);
             if (result.length != 0 && result[0]['points'] == 3) {
                 data[0]['passed'] = true;
                 if(type === 'bangers'){

@@ -55,6 +55,14 @@ router.get('/stream_issues', (req, res) =>{
     action: '/home'
   })
 });
+router.get('/votingList_issues*', (req, res) =>{
+    let fractions = req.query.fractions;
+    res.render('notification', {
+    layout: 'notification',
+    message: 'Голосование вам не доступно!<br>На данный момент вы посмотрели видео от '+fractions,
+    action: '/home'
+  })
+});
 router.get('/voting_issues', (req, res) =>{
     res.render('notification', {
     layout: 'notification',

@@ -70,8 +70,11 @@ function checkControlPoints(time){
     }
 let points = 0;
     function savePoints(){
-    points++;
-    $.ajax({
+        points++;
+        if(points>3){
+            
+        }else{
+            $.ajax({
   type: "POST",
   url: "/action/stream",
   data: "link="+link+"&points="+points ,
@@ -82,7 +85,10 @@ let points = 0;
     console.log(msg);
   }       
 });
+        }
+    
+    
     }
 
 
-setInterval(savePoints, 180000);
+setInterval(savePoints, 1000);
