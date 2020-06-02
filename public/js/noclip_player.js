@@ -43,7 +43,7 @@ let control_points;
             clearInterval(timer);
         }
         if (event.data == YT.PlayerState.PLAYING) {
-            timer = setInterval(function(){checkTime(checkControlPoints); }, 5000);
+            timer = setInterval(function(){checkTime(checkControlPoints); }, 8000);
         }
       }
       function stopVideo() {
@@ -53,16 +53,16 @@ let control_points;
         let delta1 = Math.abs(time - control_points[0]);
         let delta2 = Math.abs(time - control_points[1]);
         let delta3 = Math.abs(time - control_points[2]);
-        if(delta1 < 6 || delta2 < 6 || delta3 < 6){
-            if(time > control_points[0] && Math.abs(time - control_points[0]) < 7){
+        if(delta1 < 10 || delta2 < 10 || delta3 < 10){
+            if(time > control_points[0] && Math.abs(time - control_points[0]) < 11){
                 console.log(1);
                 savePoints(1);
             }
-            if(time > control_points[1] && Math.abs(time - control_points[1]) < 7){
+            if(time > control_points[1] && Math.abs(time - control_points[1]) < 11){
                 console.log(2);
                 savePoints(2);
             }
-            if(time > control_points[2] && Math.abs(time - control_points[2]) < 7){
+            if(time > control_points[2] && Math.abs(time - control_points[2]) < 11){
                 console.log(3);
                 savePoints(3);
             }
@@ -74,7 +74,7 @@ let control_points;
         let time = player.getCurrentTime();
         let delta = time - last_time;
         console.log(delta);
-        if(delta < 6){
+        if(delta < 10){
             last_time = time;
             callback(time);
         }else{

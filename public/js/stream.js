@@ -43,7 +43,7 @@ let control_points;
             clearInterval(timer);
         }
         if (event.data == YT.PlayerState.PLAYING) {
-            timer = setInterval(function(){checkTime(checkControlPoints); }, 5000);
+            timer = setInterval(function(){checkTime(checkControlPoints); }, 7000);
         }
       }
 function checkControlPoints(time){
@@ -58,7 +58,7 @@ function checkControlPoints(time){
         let time = player.getCurrentTime();
         let delta = time - last_time;
         console.log(delta);
-        if(delta < 6){
+        if(delta < 10){
             last_time = time;
         }else{
             preventCheating();
@@ -85,4 +85,4 @@ let points = 0;
     }
 
 
-setInterval(savePoints, 1800000);
+setInterval(savePoints, 180000);
