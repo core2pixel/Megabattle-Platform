@@ -64,7 +64,6 @@ User.prototype = {
             });
             let status = typeof result;
             if (status) {
-                console.log(points)
                 clearEpisodes();
             }else{
                 unlockEpisodes();

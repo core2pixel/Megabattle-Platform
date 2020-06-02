@@ -131,7 +131,6 @@ Render.prototype = {
         let sql = `SELECT fraction FROM progress WHERE (vk_id = '`+vk_id+`' AND type = '`+type+`' AND (points = 3 OR points = 4) AND fraction != '`+user_fraction+`' )`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log(sql);
             if (result.length > 4 || result.length === 4 || (result.length === 3 && user_fraction !== 'watcher')) {
                 checkAlreadyVoted(type, data);
             }else if(result.length < 4 && result.length != 0){
@@ -196,7 +195,6 @@ Render.prototype = {
         let sql = `SELECT points FROM progress WHERE (vk_id ='`+vk_id+`' AND type = '`+type+`' AND link = '`+link+`')`;
         pool.query(sql, function (err, result) {
             if (err) throw err
-            console.log(sql);
             if (result.length != 0 && result[0]['points'] == 3) {
                 data[0]['passed'] = true;
                 if(type === 'bangers'){
