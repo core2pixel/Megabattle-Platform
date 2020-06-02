@@ -91,4 +91,4 @@ let points = 0;
     }
 
 
-setInterval(savePoints, 1000);
+setInterval(savePoints, 180000);
