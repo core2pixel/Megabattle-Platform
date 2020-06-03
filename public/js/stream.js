@@ -17,7 +17,12 @@
           }
         });
       }
-        
+        $( document ).ready(function() {
+   if($(window).width() < 991){
+       $('.profile_user-photo').css('background-image','url(img/burger_menu.png)');
+       $('.profile_user-photo').css('height','37px');
+   }
+});
 let control_points;
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
@@ -90,5 +95,5 @@ let points = 0;
     
     }
 
-
-setInterval(savePoints, 180000);
+//180000
+setInterval(savePoints, 3000);

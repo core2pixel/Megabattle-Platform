@@ -27,7 +27,7 @@ User.prototype = {
         });
     },
     stream: function (vk_id, link, points, fraction, type, callback) {
-        let sql = `SELECT * FROM stream WHERE vk_id = '`+vk_id+`' ` ;
+        let sql = `SELECT * FROM stream WHERE vk_id = '`+vk_id+`' AND link = '`+link+`'` ;
 
         pool.query(sql, function (err, result) {
             if (err) throw err
