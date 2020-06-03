@@ -16,6 +16,9 @@
 }
 /*Notifications*/
 @media(max-width: 500px){
+    .seriesControl {
+    height: 55px;
+}
 .alert_name {
     font-size: 20px;
 }
@@ -278,4 +281,64 @@
     .streamStatus{
         font-size: 20px;
     }
+}
+
+/*INTRO*/
+@media(max-width: 620px){
+    .intro{
+    text-align: center;
+    max-width: 260px;
+    margin: auto;
+}
+.logo{
+    padding-top: 120px;
+    text-align: center;
+}
+.logo > img{
+    height: 100px;
+}
+.intro_name{
+    padding-top: 10px;
+    font-size: 18px;
+}
+.intro_text{
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.intro_buttons > button{
+    color: white;
+    padding: 15px;
+    min-width: 100px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+}
+@media(max-width: 420px){
+    .intro{
+    text-align: center;
+    max-width: 260px;
+    margin: auto;
+}
+.logo{
+    padding-top: 120px;
+    text-align: center;
+}
+.logo > img{
+    height: 80px;
+}
+.intro_name{
+    padding-top: 10px;
+    font-size: 18px;
+}
+.intro_text{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.intro_buttons > button{
+    color: white;
+    padding: 10px;
+    min-width: 100px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
 }

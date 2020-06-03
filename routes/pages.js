@@ -32,7 +32,7 @@ if(!dev_mode){
 router.get('/', (req, res, next) => {
     let user = req.session.user;
     if(user) {
-        res.redirect('/home');
+        res.redirect('/intro');
         return;
     }
     // IF not we just send the index page.
@@ -40,6 +40,19 @@ router.get('/', (req, res, next) => {
     res.render('login', {layout: 'auth',  bg: 'login'});
 })
 
+router.get('/intro', (req, res) =>{
+    let user = req.session.user;
+    console.log(user.username);
+    if(user) {
+            console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл на начальную страницу.');
+            res.render('intro',  {name:user.username,layout: 'intro', avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream'});  
+        //
+    }else{
+       res.redirect('/notification/noAuth'); 
+    }
+    
+    
+});
 // Get home page
 router.get('/home', (req, res, next) => {
     //Загружаем инфо о сессии
@@ -157,9 +170,7 @@ router.get('/stream', (req, res) =>{
     }
     
     
-}
-  
-);
+});
 router.get('/voting', (req, res) =>{
     let user = req.session.user;
     if(user) {
@@ -219,7 +230,7 @@ router.get('/vk_register', (req, res)=>{
             req.session.user.vk_image = vk_image['response'][0].photo_200;
             req.session.opp = 0;
             console.log(username + ' из '+fraction+' зарегистрировался');
-            res.redirect('/home');
+            res.redirect('/intro');
           }else if(result==='Account already registered'){
               res.redirect('/notification/accountAlreadyRegistered');
           }
@@ -241,7 +252,7 @@ router.get('/vk_login', (req, res) =>{
             req.session.user = body;
             req.session.opp = 0;
             console.log(body['user_id'] + ' вошёл в систему');
-            res.redirect('/home');
+            res.redirect('/intro');
           }else{
               res.redirect('/notification/wasntegistered');
           }

@@ -18,6 +18,12 @@ $('.profile_user-photo').click(function(){
     }
    
 });
+$( document ).ready(function() {
+   if($(window).width() < 991){
+       $('.profile_user-photo').css('background-image','url(img/burger_menu.png)');
+       $('.profile_user-photo').css('height','37px');
+   }
+});
 
 
 let vh = window.innerHeight * 0.01;
@@ -25,7 +31,7 @@ let vh = window.innerHeight * 0.01;
 document.documentElement.style.setProperty('--vh', `${vh}px`);
 function contentFix(){
 
-let headerHeight = document.getElementById('header').clientHeight;
+let headerHeight = document.getElementById('header').clientHeight - 10;
 let contentHeight = document.getElementById('content').clientHeight;
 let rootHeight = document.getElementById('root').clientHeight;
 let galeryHeight = rootHeight - (headerHeight+contentHeight);
@@ -111,11 +117,21 @@ $('#seriesSlider').slick({
 
 $('#slide_back').click(function(){
     $('#seriesSlider').slick('slickPrev');
+    setTimeout(hideOption('#slide_back', showOption), 1500);
 });
 $('#slide_forward').click(function(){
     $('#seriesSlider').slick('slickNext');
-})
+    setTimeout(hideOption('#slide_forward',showOption), 1500);
     
+})
+function showOption(){
+    $('.optionActive').css('opacity','1');
+    
+}
+function hideOption(id,callback){
+    $(id).css('opacity','0.2');
+    setTimeout(callback, 1500);
+}
 $('.field_like > button').click(function(){
     savePoints();
     $('.field_like > button').css('background-color', 'rgba(219, 117, 253, 0.5)');

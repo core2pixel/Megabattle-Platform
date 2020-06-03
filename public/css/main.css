@@ -717,3 +717,31 @@ option{
 .btn_vote > button{
     background-color: rgba(219, 117, 253, 1) !important;
 }
+
+/*INTRO*/
+.intro{
+    text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+.logo{
+    padding-top: 120px;
+    text-align: center;
+}
+.logo > img{
+    height: 200px;
+}
+.intro_name{
+    padding-top: 20px;
+    font-size: 24px;
+}
+.intro_text{
+    margin-bottom: 20px;
+}
+.intro_buttons > button{
+    color: white;
+    padding: 15px;
+    min-width: 100px;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
