@@ -282,6 +282,11 @@
         font-size: 20px;
     }
 }
+@media(max-width: 340px){
+    .player_wrapper {
+    height: 320px;
+}
+}
 
 /*INTRO*/
 @media(max-width: 620px){
@@ -342,3 +347,4 @@
     font-size: 16px;
 }
 }
+

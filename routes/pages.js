@@ -77,6 +77,7 @@ router.get('/home', (req, res, next) => {
                     name: user.username,
                     avatar: user.vk_image,
                     series: result,
+                    color: getColor(result[0]['fraction']),
                     banger_is_enabled: result[0]['bangers_is_enabled'],
                     series_is_enabled: result[0]['series_is_enabled'],
                     like: result[0]['like'],
@@ -141,7 +142,6 @@ router.get('/player', (req, res) => {
                     vk_id: user.vk_id,
                     avatar: user.vk_image,
                     script: script,
-                    fraction: translateFraction(user.fraction),
                     bg: 'player'
                 });    
                 }else{
@@ -335,5 +335,24 @@ function checkGetFraction(fraction){
     break;
   default:
     return false;  
+}
+}
+
+function getColor(fraction){
+        switch (fraction) {
+    case 'mff':
+    return '#00AE4C';        
+    break;        
+    case 'ktu':
+    return '#4EB7A9';          
+    break;
+    case 'btins':
+    return '#39B4E6';         
+    break;
+    case 'ftmi':
+    return '#D97E1F';  
+    break;
+  default:
+    return '#00AE4C';  
 }
 }
