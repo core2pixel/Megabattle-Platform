@@ -42,7 +42,6 @@ router.get('/', (req, res, next) => {
 
 router.get('/intro', (req, res) =>{
     let user = req.session.user;
-    console.log(user.username);
     if(user) {
             console.log(user.user_id + '['+translateFraction(user.fraction)+'] зашёл на начальную страницу.');
             res.render('intro',  {name:user.username,layout: 'intro', avatar:user.vk_image, fraction: translateFraction(user.fraction), bg: 'stream'});  
