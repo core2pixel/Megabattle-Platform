@@ -20,8 +20,7 @@ let bangers = [
 {"id":"4","name":"Бэнгер","text":"Бэнгер ФТМИ","fraction":"ftmi","youtube_link":"iX7Q0fYDvdw","bangers_is_enabled":true},
 {"id":"5","name":"Бэнгер","text":"Бэнгер факультета КТиУ","fraction":"ktu","youtube_link":"GShDe1sk4b8","bangers_is_enabled":true},
 {"id":"6","name":"Бэнгер","text":"Бэнгер факультета БТИНС","fraction":"btins","youtube_link":"Pf7soG40Hrk","bangers_is_enabled":true}
-]
-
+] 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
