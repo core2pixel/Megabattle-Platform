@@ -736,6 +736,7 @@ option{
     font-size: 24px;
 }
 .intro_text{
+    font-size: 20px;
     margin-bottom: 20px;
 }
 .intro_buttons > button{
