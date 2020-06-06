@@ -348,3 +348,20 @@
 }
 }
 
+
+@media(max-height: 700px){
+    .logo > img {
+    height: 110px;
+}
+}
+
+@media(max-height: 600px){
+    .intro_name {
+    padding-top: 10px;
+    font-size: 20px;
+}
+    .intro_text {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+}

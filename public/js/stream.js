@@ -73,7 +73,7 @@ function checkControlPoints(time){
     function preventCheating(){
         player.seekTo(last_time, true);
     }
-let points = 0;
+let points = 1;
     function savePoints(){
         points++;
         if(points>3){
@@ -96,4 +96,4 @@ let points = 0;
     }
 
 //480000
-setInterval(savePoints, 480000);
+setInterval(savePoints, 15000);
